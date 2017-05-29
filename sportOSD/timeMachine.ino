@@ -18,8 +18,8 @@ void TIMEMACHINE_250ms() {
 }
 
 void  TIMEMACHINE_1000ms() {
-  SPORT_debug();
-  SYS_debug();
+  //SPORT_debug();
+  //SYS_debug();
 }
 
 

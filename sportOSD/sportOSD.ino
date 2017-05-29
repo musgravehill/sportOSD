@@ -22,7 +22,6 @@ int16_t SYS_GPS_NOW_altitude = 0;
 byte SYS_RSSI = 0;
 float SYS_ACC_V = 0.0f;
 
-
 bool OSD_isRenderAllow = true; //false=>waiting for next Vsync interrupt event
 
 //TIMEMACHINE
@@ -33,8 +32,7 @@ void setup() {
   OSD_init();
   SPORT_init();
   Serial.begin(9600);
-
-  GPS_test();
+  GPS_mock();
 }
 
 void loop() {

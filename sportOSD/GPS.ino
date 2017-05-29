@@ -1,7 +1,7 @@
 
 
 
-void GPS_update_home_distance_and_home_azimuth() {  
+void GPS_update_home_distance_and_home_azimuth() {
   // returns distance in meters between two positions, both specified
   // as signed decimal-degrees latitude and longitude. Uses great-circle
   // distance computation for hypothetical sphere of radius 6372795 meters.
@@ -36,13 +36,7 @@ void GPS_update_home_distance_and_home_azimuth() {
   SYS_GPS_HOME_azimuth = degrees(a2);
 }
 
-void GPS_test() {
+void GPS_mock() {
   SYS_GPS_NOW_lat = 57.444444;
-  SYS_GPS_NOW_long = 39.444444;
-  GPS_distance_and_azimuth();
-  Serial.println("");
-  Serial.print("SYS_GPS_HOME_dist=");
-  Serial.println(SYS_GPS_HOME_dist, DEC);
-  Serial.print("SYS_GPS_HOME_bearingt=");
-  Serial.println(SYS_GPS_HOME_azimuth, DEC);
+  SYS_GPS_NOW_long = 39.444444;  
 }
