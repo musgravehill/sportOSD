@@ -1,7 +1,7 @@
 
 
 
-void GPS_distance_and_azimuth() {
+void GPS_update_home_distance_and_home_azimuth() {  
   // returns distance in meters between two positions, both specified
   // as signed decimal-degrees latitude and longitude. Uses great-circle
   // distance computation for hypothetical sphere of radius 6372795 meters.

@@ -8,7 +8,7 @@ Max7456 osd;
 FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
 FrSkySportDecoder decoder; // Create decoder object without polling
 
-static float GPS_scaleLonDown; // this is used to offset the shrinking longitude as we go towards the poles
+
 float SYS_GPS_HOME_lat = 57.55555; //HOME TODO
 float SYS_GPS_HOME_long = 39.55555; //HOME TODO
 

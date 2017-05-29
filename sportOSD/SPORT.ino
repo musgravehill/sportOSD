@@ -4,7 +4,15 @@ void SPORT_init() {
 }
 
 void SPORT_getData() {
+  float SYS_GPS_NOW_lat = xjt.getLat();
+  float SYS_GPS_NOW_long = xjt.getLon();
+  int16_t SYS_GPS_NOW_course_over_ground = xjt.getCog(); //0..360 degree 0=North
+  int16_t SYS_GPS_NOW_speed = xjt.getSpeed();
+  int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
+  byte SYS_RSSI =  xjt.getRssi();
+  float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
 
+  GPS_update_home_distance_and_home_azimuth();
 }
 
 
@@ -21,20 +29,15 @@ void SPORT_dbg() {
   //Serial.print("Decoded data with AppID 0x");
   //Serial.println(decodeResult, HEX);
   //}
-
   // Display data once a second to not interfeere with data decoding
-
-
-
-
   // Get basic XJT data (RSSI/ADC1/ADC2/RxBatt/SWR data)
   Serial.print("RSSI = "); Serial.print(xjt.getRssi()); // RSSI
   Serial.print("; ADC1 = "); Serial.print(xjt.getAdc1());      // ADC1 voltage in volts
   Serial.print("V; ADC2 = "); Serial.print(xjt.getAdc2());     // ADC2 voltage in volts
   Serial.print("V; RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
   Serial.print("V; SWR = "); Serial.println(xjt.getSwr());     // SWR
-  //flvs
-  Serial.print("ACC_V = "); Serial.println(getCell1() + getCell2() + getCell3());
+  //FAS sensor
+  Serial.print("ACC_V = "); Serial.println(xjt.getVoltage()); //FAS sensor 
   // Get GPS data
   Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6);
   Serial.print("; lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)

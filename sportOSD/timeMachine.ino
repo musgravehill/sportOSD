@@ -13,9 +13,10 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_250ms() {  
+void TIMEMACHINE_250ms() {
+  SPORT_getData();
 }
 
 void  TIMEMACHINE_1000ms() {
-  
+
 }
