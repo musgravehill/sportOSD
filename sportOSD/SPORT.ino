@@ -15,12 +15,7 @@ void SPORT_getData() {
   GPS_update_home_distance_and_home_azimuth();
 }
 
-
-
-
-
-
-void SPORT_dbg() {
+void SPORT_debug() {
   // Read and decode the telemetry data, note that the data will only be decoded for sensors
   // that that have been passed to the begin method. Print the AppID of the decoded data.
   //uint16_t decodeResult;
