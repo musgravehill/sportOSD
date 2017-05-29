@@ -1,4 +1,4 @@
-#define DEBUG true
+//#define DEBUG true
 
 #define PIN_VSYNC 2
 

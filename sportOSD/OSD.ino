@@ -6,9 +6,10 @@ void OSD_init() {
 
   SPI.begin();
   osd.init(PIN_MAX7456_SS);
-  osd.setDisplayOffsets(60, 18);
+  osd.setDisplayOffsets(32, 32);
   osd.setBlinkParams(_8fields, _BT_BT);
   osd.activateOSD();
+  osd.clearScreen();
 }
 
 
