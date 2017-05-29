@@ -58,20 +58,30 @@ void OSD_render() {
   if (OSD_isRenderAllow) {
     OSD_isRenderAllow = false; //waiting for next Vsync interrupt event
     if (SYS_GPS_isHomeFixed) {
-      
+
     } else {
-      osd.print("GPS HOME POS PROCESSING", 0, 0);
+      osd.print("gps home process", 2, 2);
     }
 
+    osd.printMax7456Char(30, 12, 12, true);
     ////////////TEST!!!!!!!!!
-  //osd.printMax7456Char(0x01, 0, 1);
-  //osd.print("Hello world :)", 1, 3);
-  //osd.print("Current Arduino time :", 1, 4);
-
-  //osd.printMax7456Char(0xD1, 9, 6, true);
-  //osd.print("00'00\"", 10, 6);
-  //byte tab[] = {0xC8, 0xC9};
-  //osd.printMax7456Chars(tab, 2, 12, 7);
+    /*int posX = 1; int posY = 1;
+    for (int i = 0 ; i <= 0xff; i++)  {
+      osd.printMax7456Char(i, posX, posY, true);
+      posX++;      
+      if (posX > 20) {
+        posX = 1;
+        posY++;
+      }
+    }*/
     
-  }  
+
+   
+    //osd.print("Current Arduino time :", 1, 4);
+    //osd.printMax7456Char(0xD1, 9, 6, true);
+    //osd.print("00'00\"", 10, 6);
+    //byte tab[] = {0xC8, 0xC9};
+    //osd.printMax7456Chars(tab, 2, 12, 7);
+
+  }
 }
