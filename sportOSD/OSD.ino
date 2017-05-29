@@ -1,5 +1,16 @@
 // see max7456registers.h  SET PAL
 
+void OSD_init() {
+  pinMode(PIN_VSYNC, INPUT);
+  pinMode(PIN_MAX7456_SS, OUTPUT);
+
+  SPI.begin();
+  osd.init(PIN_MAX7456_SS);
+  osd.setDisplayOffsets(60, 18);
+  osd.setBlinkParams(_8fields, _BT_BT);
+  osd.activateOSD();
+}
+
 
 /*
   #define AMPERAGEPIN   A1
@@ -39,10 +50,16 @@ void OSD_vsync_interrupt_init() {
 }
 
 void OSD_vsync_interrupt() {
-  
+  OSD_isRenderAllow = true;
 }
 
 void OSD_render() {
+  if (OSD_isRenderAllow) {
+    //stuff is here
+    OSD_isRenderAllow = false; //waiting for next Vsync interrupt event
+  }
+
+  ////////////TEST!!!!!!!!! 
   osd.printMax7456Char(0x01, 0, 1);
   osd.print("Hello world :)", 1, 3);
   osd.print("Current Arduino time :", 1, 4);
@@ -51,4 +68,5 @@ void OSD_render() {
   osd.print("00'00\"", 10, 6);
   byte tab[] = {0xC8, 0xC9};
   osd.printMax7456Chars(tab, 2, 12, 7);
+  
 }

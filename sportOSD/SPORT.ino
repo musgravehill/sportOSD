@@ -1,5 +1,12 @@
+
+void SPORT_init() {
+  decoder.begin(PIN_SPORT_IN, &xjt);
+}
+
+
+
 /*
- // System data
+  // System data
     uint8_t getRssi();
     float getAdc1();
     float getAdc2();
