@@ -9,12 +9,20 @@ FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
 FrSkySportDecoder decoder; // Create decoder object without polling
 
 static float GPS_scaleLonDown; // this is used to offset the shrinking longitude as we go towards the poles
-float GPS_HOME_lat = 57.55555; //HOME TODO
-float GPS_HOME_long = 39.55555; //HOME TODO
-float GPS_NOW_lat;
-float GPS_NOW_long;
-uint16_t GPS_HOME_dist; //in metr
-int16_t GPS_HOME_bearing; //0..360 degree
+float SYS_GPS_HOME_lat = 57.55555; //HOME TODO
+float SYS_GPS_HOME_long = 39.55555; //HOME TODO
+
+float SYS_GPS_NOW_lat = 0.0f;
+float SYS_GPS_NOW_long = 0.0f;
+int16_t SYS_GPS_HOME_dist = 0; //in metr
+int16_t SYS_GPS_HOME_azimuth = 0; //0..360 degree ARROW TO HOME
+int16_t SYS_GPS_NOW_course_over_ground = 0; //0..360 degree 0=North
+int16_t SYS_GPS_NOW_speed = 0;
+int16_t SYS_GPS_NOW_altitude = 0;
+byte SYS_RSSI = 0;
+float SYS_ACC_V = 0.0f;
+
+
 bool OSD_isRenderAllow = true; //false=>waiting for next Vsync interrupt event
 
 //TIMEMACHINE
@@ -25,6 +33,8 @@ void setup() {
   OSD_init();
   SPORT_init();
   Serial.begin(9600);
+
+  GPS_test();
 }
 
 void loop() {

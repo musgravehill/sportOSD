@@ -3,7 +3,49 @@ void SPORT_init() {
   decoder.begin(PIN_SPORT_IN, &xjt);
 }
 
+void SPORT_getData() {
 
+}
+
+
+
+
+
+
+void SPORT_dbg() {
+  // Read and decode the telemetry data, note that the data will only be decoded for sensors
+  // that that have been passed to the begin method. Print the AppID of the decoded data.
+  //uint16_t decodeResult;
+  //decodeResult = decoder.decode();
+  //if (decodeResult != SENSOR_NO_DATA_ID) {
+  //Serial.print("Decoded data with AppID 0x");
+  //Serial.println(decodeResult, HEX);
+  //}
+
+  // Display data once a second to not interfeere with data decoding
+
+
+
+
+  // Get basic XJT data (RSSI/ADC1/ADC2/RxBatt/SWR data)
+  Serial.print("RSSI = "); Serial.print(xjt.getRssi()); // RSSI
+  Serial.print("; ADC1 = "); Serial.print(xjt.getAdc1());      // ADC1 voltage in volts
+  Serial.print("V; ADC2 = "); Serial.print(xjt.getAdc2());     // ADC2 voltage in volts
+  Serial.print("V; RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
+  Serial.print("V; SWR = "); Serial.println(xjt.getSwr());     // SWR
+  //flvs
+  Serial.print("ACC_V = "); Serial.println(getCell1() + getCell2() + getCell3());
+  // Get GPS data
+  Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6);
+  Serial.print("; lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)
+  Serial.print("; altitude = "); Serial.print(xjt.getAltitude()); // Altitude in m (can be negative)
+  Serial.print("m; speed = "); Serial.print(xjt.getSpeed()); // Speed in m/s
+  Serial.print("m/s; COG = "); Serial.print(xjt.getCog());   // Course over ground in degrees (0-359, 0 = north)
+  char dateTimeStr[18];
+  sprintf(dateTimeStr, "%02u-%02u-%04u %02u:%02u:%02u", xjt.getDay(), xjt.getMonth(), xjt.getYear() + 2000, xjt.getHour(), xjt.getMinute(), xjt.getSecond());
+  Serial.print("; date/time = "); Serial.println(dateTimeStr); // Date (year - need to add 2000, month, day) and time (hour, minute, second)
+  Serial.println("");
+}
 
 /*
   // System data
@@ -53,31 +95,6 @@ void SPORT_init() {
     uint8_t getSecond();
 
 
-
-*/
-
-
-
-void decoder_dbg() {
-  // Read and decode the telemetry data, note that the data will only be decoded for sensors
-  // that that have been passed to the begin method. Print the AppID of the decoded data.
-  //uint16_t decodeResult;
-  //decodeResult = decoder.decode();
-  //if (decodeResult != SENSOR_NO_DATA_ID) {
-  //Serial.print("Decoded data with AppID 0x");
-  //Serial.println(decodeResult, HEX);
-  //}
-
-  // Display data once a second to not interfeere with data decoding
-
-  // Get basic XJT data (RSSI/ADC1/ADC2/RxBatt/SWR data)
-  Serial.print("Basic: RSSI = "); Serial.print(xjt.getRssi()); // RSSI
-  Serial.print(", ADC1 = "); Serial.print(xjt.getAdc1());      // ADC1 voltage in volts
-  Serial.print("V, ADC2 = "); Serial.print(xjt.getAdc2());     // ADC2 voltage in volts
-  Serial.print("V, RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
-  Serial.print("V, SWR = "); Serial.println(xjt.getSwr());     // SWR
-
-  /*
     // Get fuel sensor (FGS) data
     Serial.print("FGS: fuel = "); Serial.print(xjt.getFuel()); Serial.println("%"); // Fuel level in percent
 
@@ -96,16 +113,7 @@ void decoder_dbg() {
     // Get variometer sensor (FVAS) data
     Serial.print("FVAS: altitude = "); Serial.print(xjt.getAltitude()); Serial.print("m"); // Altitude in m (can be nevative)
     Serial.print("m, VSI = "); Serial.print(xjt.getVsi()); Serial.println("m/s");          // Verticas speed in m/s (can be nevative)
-  */
-  // Get GPS data
-  Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6); Serial.print(", lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)
-  Serial.print(", altitude = "); Serial.print(xjt.getAltitude()); // Altitude in m (can be negative)
-  Serial.print("m, speed = "); Serial.print(xjt.getSpeed()); // Speed in m/s
-  Serial.print("m/s, COG = "); Serial.print(xjt.getCog());   // Course over ground in degrees (0-359, 0 = north)
-  char dateTimeStr[18];
-  sprintf(dateTimeStr, "%02u-%02u-%04u %02u:%02u:%02u", xjt.getDay(), xjt.getMonth(), xjt.getYear() + 2000, xjt.getHour(), xjt.getMinute(), xjt.getSecond());
-  Serial.print(", date/time = "); Serial.println(dateTimeStr); // Date (year - need to add 2000, month, day) and time (hour, minute, second)
-  /*
+
         // Get accelerometer sensor (TAS) data
         Serial.print("TAS: ACCX = "); Serial.print(xjt.getAccX());                    // X axis acceleraton in Gs (can be negative)
         Serial.print("G, ACCY = "); Serial.print(xjt.getAccY());                      // Y axis acceleraton in Gs (can be negative)
@@ -118,7 +126,4 @@ void decoder_dbg() {
         // Get RPM sensor (RPMS) data
         // (set number of blades to 2 in telemetry menu to get correct rpm value)
         Serial.print("RPMS: RPM = "); Serial.println(xjt.getRpm()); // Rotations per minute
-  */
-
-  Serial.println("");
-}
+*/

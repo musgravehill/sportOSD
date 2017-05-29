@@ -13,11 +13,9 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_250ms() {
-  //OSD_render();
+void TIMEMACHINE_250ms() {  
 }
 
 void  TIMEMACHINE_1000ms() {
-  //decoder_dbg();
-  GPS_test();
+  
 }
