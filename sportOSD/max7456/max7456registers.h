@@ -62,7 +62,7 @@ union REG_VM0
 		 * @li 10 (2) = external
 		 * @li 11 (3) = internal
 		 */
-		unsigned char synchSelect : 2;
+		unsigned char synchSelect : 3;
 
 		/**@brief Video Standard Select
 		 * @li 0 = NTSC
