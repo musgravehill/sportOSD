@@ -1,17 +1,10 @@
 
 // UPLOAD FONT TABLE, run RC-mini\FRSKY-SPORT\Max7456WriteFONT
 
+#include "libs.h"
 #include "defs.h"
 
-#include <SPI.h>  //<> => standart location
-#include "max7456/max7456.h" //"" => local location
 Max7456 osd;
-
-#include "FrSkySportTelemetry/FrSkySportSensor.h"
-#include "FrSkySportTelemetry/FrSkySportSensorXjt.h"
-#include "FrSkySportTelemetry/FrSkySportSingleWireSerial.h"
-#include "FrSkySportTelemetry/FrSkySportDecoder.h"
-#include <SoftwareSerial.h>
 
 FrSkySportSensorXjt xjt;            // Create XJT sensor with default ID
 FrSkySportDecoder decoder;        // Create decoder object without polling
