@@ -1,3 +1,5 @@
+#define DEBUG true
+
 #define PIN_VSYNC 2
 
 //is it correct connection for minimOSD?

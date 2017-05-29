@@ -31,7 +31,9 @@ uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 void setup() {
   OSD_init();
   SPORT_init();
+#ifdef DEBUG
   Serial.begin(9600);
+#endif
   GPS_mock();
 }
 

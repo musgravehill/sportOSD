@@ -18,8 +18,10 @@ void TIMEMACHINE_250ms() {
 }
 
 void  TIMEMACHINE_1000ms() {
-  //SPORT_debug();
-  //SYS_debug();
+#ifdef DEBUG
+  SPORT_debug();
+  SYS_debug();
+#endif
 }
 
 
@@ -41,3 +43,4 @@ void SYS_debug() {
   Serial.println();
   Serial.println();
 }
+
