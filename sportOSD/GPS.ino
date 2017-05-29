@@ -1,5 +1,15 @@
 
-
+//get gps 500 times. If 500 times is NOTNULL, then save home position && set SYS_GPS_isHomeFixed = true
+void GPS_home_position_fix() {
+  if (!SYS_GPS_isHomeFixed && SYS_GPS_NOW_lat > 0 && SYS_GPS_NOW_long > 0) {
+    SYS_GPS_countPositionSuccess++;
+    if (SYS_GPS_countPositionSuccess > 500) {
+      SYS_GPS_HOME_lat =  SYS_GPS_NOW_lat;
+      SYS_GPS_HOME_long = SYS_GPS_NOW_long;
+      SYS_GPS_isHomeFixed = true;
+    }
+  }
+}
 
 void GPS_update_home_distance_and_home_azimuth() {
   // returns distance in meters between two positions, both specified
@@ -38,5 +48,5 @@ void GPS_update_home_distance_and_home_azimuth() {
 
 void GPS_mock() {
   SYS_GPS_NOW_lat = 57.444444;
-  SYS_GPS_NOW_long = 39.444444;  
+  SYS_GPS_NOW_long = 39.444444;
 }

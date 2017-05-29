@@ -11,8 +11,10 @@ void SPORT_getData() {
   int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
   byte SYS_RSSI =  xjt.getRssi();
   float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
-
+  
+  GPS_home_position_fix();
   GPS_update_home_distance_and_home_azimuth();
+  
 }
 
 
@@ -33,7 +35,7 @@ void SPORT_debug() {
   Serial.print("V; RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
   Serial.print("V; SWR = "); Serial.println(xjt.getSwr());     // SWR
   //FAS sensor
-  Serial.print("ACC_V = "); Serial.println(xjt.getVoltage()); //FAS sensor 
+  Serial.print("ACC_V = "); Serial.println(xjt.getVoltage()); //FAS sensor
   // Get GPS data
   Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6);
   Serial.print("; lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)

@@ -22,6 +22,8 @@ int16_t SYS_GPS_NOW_altitude = 0;
 byte SYS_RSSI = 0;
 float SYS_ACC_V = 0.0f;
 
+byte SYS_GPS_countPositionSuccess = 0;
+bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
 bool OSD_isRenderAllow = true; //false=>waiting for next Vsync interrupt event
 
 //TIMEMACHINE
