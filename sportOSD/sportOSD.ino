@@ -1,16 +1,17 @@
 
 // UPLOAD FONT TABLE, run RC-mini\FRSKY-SPORT\Max7456WriteFONT
 
+#include "defs.h"
 
-#include <SPI.h>
-#include <max7456.h>
+#include <SPI.h>  //<> => standart location
+#include "max7456/max7456.h" //"" => local location
 Max7456 osd;
 
-#include "FrSkySportSensor.h"
-#include "FrSkySportSensorXjt.h"
-#include "FrSkySportSingleWireSerial.h"
-#include "FrSkySportDecoder.h"
-#include "SoftwareSerial.h"
+#include "FrSkySportTelemetry/FrSkySportSensor.h"
+#include "FrSkySportTelemetry/FrSkySportSensorXjt.h"
+#include "FrSkySportTelemetry/FrSkySportSingleWireSerial.h"
+#include "FrSkySportTelemetry/FrSkySportDecoder.h"
+#include <SoftwareSerial.h>
 
 FrSkySportSensorXjt xjt;            // Create XJT sensor with default ID
 FrSkySportDecoder decoder;        // Create decoder object without polling
@@ -28,6 +29,9 @@ uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
 uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
 void setup() {
+  pinMode(PIN_VSYNC, INPUT);
+
+  
   SPI.begin();
   osd.init(6); //d10 or d6 on microMinimOSD ?
   osd.setDisplayOffsets(60, 18);

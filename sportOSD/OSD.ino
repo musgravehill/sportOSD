@@ -30,6 +30,18 @@
 
 */
 
+void OSD_vsync_interrupt_init() {
+  attachInterrupt(0, OSD_vsync_interrupt, FALLING); //d2
+  //LOW to trigger the interrupt whenever the pin is low,
+  //CHANGE to trigger the interrupt whenever the pin changes value
+  //RISING to trigger when the pin goes from low to high,
+  //FALLING for when the pin goes from high to low.
+}
+
+void OSD_vsync_interrupt() {
+  
+}
+
 void OSD_render() {
   osd.printMax7456Char(0x01, 0, 1);
   osd.print("Hello world :)", 1, 3);
