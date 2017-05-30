@@ -27,9 +27,12 @@ void setup()
     }
   }*/
 
-  //osd.printMax7456Char(0x01,0,1);
-  osd.print("GPS process Hello world :)",1,3);
-  osd.print("Current Arduino time :",1,4);
+  osd.printMax7456Char(0x00,4,4);
+  osd.printMax7456Char(0x02,5,5);
+  osd.printMax7456Char(0x03,6,6);
+  osd.printMax7456Char(0x09,7,8);
+  //osd.print("GPS process Hello world :)",1,3);
+  //osd.print("Current Arduino time :",1,4);
 
   //osd.printMax7456Char(0xD1,9,6,true);
   //osd.print("00'00\"",10,6);

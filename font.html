@@ -1,15 +1,17 @@
-#include "Arduino.h"
-#include <SPI.h>  //<> => standart location
-#include "max7456/max7456.h" //"" => local location
-#include "max7456/max7456.cpp"
-#include "max7456/max7456registers.h"
+<HTML>
+<HEAD>
+<TITLE>FONT 54b</TITLE>
+</HEAD>
+<BODY>
+ <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  
+<canvas id="canvas" style="width:800px; height:800px"></canvas>
 
-
-Max7456 osd;
-//THIS ARRAY IS OBTAINED BY AN OTHER PROGRAM
-//Those 13.5ko of data are stored in the program memory.
-//Be awared that 0xFF are stored as 0x55 as program memory can't stand series of 0xFF (Arduino vicious problem)
-const char tableOfAllCharacters[13824] PROGMEM = { 
+<script>
+    var chrs = [
 0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,
 0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,
 0x55,0x55,0x55,0xfc,0x55,0x3f,0xf2,0x3c,0x8f,0xca,0x82,0xa3,0xf2,0x8c,0xa3,0xfc,0x8f,0x23,0xfc,0x8f,0x23,0xf2,0x3c,0x8f,0xfc,0x55,0x3f,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,
@@ -266,62 +268,121 @@ const char tableOfAllCharacters[13824] PROGMEM = {
 0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0xf0,0xf3,0xf3,0xca,0x08,0xc8,0x20,0x8a,0x28,0x20,0x88,0x88,0x20,0x88,0x88,0x2a,0x88,0x08,0x20,0x88,0xc8,0x20,0x88,0xc8,0x20,0x88,0xc8,0x20,0x88,0xc8,0xcf,0x33,0xf3,
 0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0xc0,0xf3,0xf3,0x2a,0x08,0xc8,0x20,0x8a,0x28,0x20,0x88,0x88,0x20,0x88,0x88,0x2a,0x08,0x08,0x20,0xc8,0xc8,0x23,0xc8,0xc8,0x23,0xc8,0xc8,0x23,0xc8,0xc8,0xcf,0xf3,0xf3,
 0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa
-}
- ;
+]; 
 
 
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");    
+    context.fillStyle = "#0000ee";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	
+	//alert('bin='+bin+' p='+px0+' p='+px1+' p='+px2+' p='+px3);
+	 
 
-void setup()
-{
-  //Sample code : Write a complete table of character in the character memory of the max7456.
-  charact currentChar; //represents a character as stored in memory (byte[64])
-  Serial.begin(9600);
-  SPI.begin();
-  osd.init(6);
-  //osd = new Max7456(6); //new Max7456 with CS on pin 6.
+	var px_posX = 0;
+	var px_posY = 0;	
+	
+	var chr_offsetX = 0;
+	var chr_offsetY = 0;
+	
+	var chrs_in_line = 0;
+	
+	//12 * 18 pixels;  
+	//each pixel 2 bit coded	
+	 //16 chars in line
+	
+	$(chrs).each(function(i,val){   
+	    var bin = Hex2Bin(val);
+		var px0 = bin[0] + bin[1];
+		var px1 = bin[2]+ bin[3];
+		var px2 = bin[4] +bin[5];
+		var px3 = bin[6] +bin[7];		 
+		 
+		context.fillStyle = getColor(px0);
+		context.fillRect(px_posX+chr_offsetX, px_posY+chr_offsetY, 1, 1);
+		px_posX++;
+		
+		context.fillStyle = getColor(px1);
+		context.fillRect(px_posX+chr_offsetX, px_posY+chr_offsetY, 1, 1);
+		px_posX++;
+		
+		context.fillStyle = getColor(px2);
+		context.fillRect(px_posX+chr_offsetX, px_posY+chr_offsetY, 1, 1);
+		px_posX++;
+		
+		context.fillStyle = getColor(px3);
+		context.fillRect(px_posX+chr_offsetX, px_posY+chr_offsetY, 1, 1);
+		px_posX++;
+		
+		if(px_posX>= 12){
+		//new line in char
+		   px_posX=0;
+		   px_posY++;
+		}
+		if(px_posY>=18){
+		//new char
+			chr_offsetX += 18; 
+			chrs_in_line++;
+			px_posX=0;
+		    px_posY=0;
+		}
+        if(chrs_in_line>=16){
+		chrs_in_line=0;
+		  chr_offsetY+= 18; 
+		  chr_offsetX=0;
+		  px_posX=0;
+		  px_posY=0;
+		}	 
+		
+		 
+	});
+	
+	function getColor(px){
+	  if(px == '00'){
+		return '#000000';
+	  }
+	  else if(px == '01'){
+		return '#fff';
+	  }
+	  else if(px == '10'){
+		return '#fff';
+	  }
+	  else if(px == '11'){
+		return '#ffffff';
+	  }
+	  return '#ffffff';
+	}
+	
+    
+	
+	
+	
+	
+	
+	
+	//Useful Functions
+function checkBin(n){return/^[01]{1,64}$/.test(n)}
+function checkDec(n){return/^[0-9]{1,64}$/.test(n)}
+function checkHex(n){return/^[0-9A-Fa-f]{1,64}$/.test(n)}
+function pad(s,z){s=""+s;return s.length<z?pad("0"+s,z):s}
+function unpad(s){s=""+s;return s.replace(/^0+/,'')}
 
-  Serial.println("INSERTING CHARACTERS TABLE IN MAX7456");
-  Serial.println("ARE YOU SURE ? (y/n)");
-  bool goodChar = false;
-  osd.activateOSD(false); // Deactivate osd display.
-  //Just some serial manipulations
-  while (!goodChar)
-  {
-    while (!Serial.available() );
-    char found;
-    found =  char(Serial.read());
-    goodChar = (found == 'y' || found == 'Y');
-    if (found == 'n' || found == 'N')
-    {
-      Serial.println("------ NOTHING DONE ------");
-      Serial.println("please unplug your arduino");
-      while (true);
-    }
-  }
+//Decimal operations
+function Dec2Bin(n){if(!checkDec(n)||n<0)return 0;return n.toString(2)}
+function Dec2Hex(n){if(!checkDec(n)||n<0)return 0;return n.toString(16)}
 
-  char number[] = "000";
-  for (int i = 0 ; i <= 0xff; i++)
-  {
-    delay(70);
-    Serial.println();
-    Serial.print("inserting ");
-    dtostrf(i, 3, 0, number);
-    Serial.print(number);
-    Serial.print(" / 255");
+//Binary Operations
+function Bin2Dec(n){if(!checkBin(n))return 0;return parseInt(n,2).toString(10)}
+function Bin2Hex(n){if(!checkBin(n))return 0;return parseInt(n,2).toString(16)}
 
-    Max7456::getCARACFromProgMem(tableOfAllCharacters, i, currentChar); //Because the table is too big for ram memory
-    osd.sendCharacter(currentChar, i&0xF0, i&0xF0); //We send currentChar at address i.
+//Hexadecimal Operations
+function Hex2Bin(n){if(!checkHex(n))return 0;return parseInt(n,16).toString(2)}
+function Hex2Dec(n){if(!checkHex(n))return 0;return parseInt(n,16).toString(10)}
 
-    for (int j = 0 ; j < 19 ; j++) //Rewind Serial.
-      Serial.print(char(0x08));
+    
 
-  }
-  Serial.println();
-  Serial.println("--------- DONE ! ---------");
-  Serial.println("please unplug your arduino");
-}
+</script>
 
-void loop()
-{
-
-}
+</BODY>
+</HTML>
