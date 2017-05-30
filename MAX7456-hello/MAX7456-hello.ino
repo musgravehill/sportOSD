@@ -15,11 +15,10 @@ void setup()
   osd.init(6);
   osd.setDisplayOffsets(60, 18);
   osd.setBlinkParams(_8fields, _BT_BT);
-
   osd.activateOSD();
+  osd.clearScreen();
 
-
-  int posX = 1; int posY = 1;
+  /*int posX = 1; int posY = 1;
   for (int i = 0 ; i <= 0xff; i++)  {
     osd.printMax7456Char(i, posX, posY, true);
     posX++;
@@ -27,11 +26,11 @@ void setup()
       posX = 1;
       posY++;
     }
-  }
+  }*/
 
   //osd.printMax7456Char(0x01,0,1);
-  //osd.print("GPS process Hello world :)",1,3);
-  //osd.print("Current Arduino time :",1,4);
+  osd.print("GPS process Hello world :)",1,3);
+  osd.print("Current Arduino time :",1,4);
 
   //osd.printMax7456Char(0xD1,9,6,true);
   //osd.print("00'00\"",10,6);
@@ -48,8 +47,8 @@ void loop()
 
   counter = millis()/1000;
 
-  //osd.print(int(counter/60),10,6,2,0,false,true);
-  //osd.print(int(counter%60),13,6,2,0,false,true);
+  osd.print(int(counter/60),10,6,2,0,false,true);
+  osd.print(int(counter%60),13,6,2,0,false,true);
 
   delay(100);
 }

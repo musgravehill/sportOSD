@@ -14,7 +14,7 @@
 //i.e address 0x00 -> ' '
 //....
 //    address 0x5A -> 'z'
-#define MAX7456_TABLE_ASCII
+//#define MAX7456_TABLE_ASCII
 
 #include "max7456registers.h"
 
