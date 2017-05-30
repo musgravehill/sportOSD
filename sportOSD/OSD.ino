@@ -36,6 +36,26 @@ void OSD_GPS() {
   else {
     
   }
+/*
+ #define SYM_ARROW_SOUTH 0X60
+#define SYM_ARROW_2 0X61
+#define SYM_ARROW_3 0X62
+#define SYM_ARROW_4 0X63
+#define SYM_ARROW_EAST 0X64
+#define SYM_ARROW_6 0X65
+#define SYM_ARROW_7 0X66
+#define SYM_ARROW_8 0X67
+#define SYM_ARROW_NORTH 0X68
+#define SYM_ARROW_10 0X69
+#define SYM_ARROW_11 0X6A
+#define SYM_ARROW_12 0X6B
+#define SYM_ARROW_WEST 0X6C
+#define SYM_ARROW_14 0X6D
+#define SYM_ARROW_15 0X6E
+#define SYM_ARROW_16 0X6F
+*/
+
+  
   screenBuffer[0] = (char)0;
   screenBuffer[0]=SYM_HOME;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
