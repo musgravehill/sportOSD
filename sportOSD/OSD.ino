@@ -36,7 +36,9 @@ void OSD_GPS() {
   else {
     
   }
-  MAX7456_WriteString(SYM_HOME, getPosition(OSD_POS_HOME_AZIMUTH));
+  screenBuffer[0] = (char)0;
+  screenBuffer[0]=SYM_HOME;
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
    
   
 
