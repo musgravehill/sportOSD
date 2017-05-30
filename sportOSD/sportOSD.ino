@@ -1,10 +1,9 @@
 
 // UPLOAD FONT TABLE, run RC-mini\FRSKY-SPORT\Max7456WriteFONT
 
-#include "libs.h"
-#include "defs.h"
+#include "incl.h"
 
-Max7456 osd;
+
 FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
 FrSkySportDecoder decoder; // Create decoder object without polling
 
@@ -24,14 +23,18 @@ float SYS_ACC_V = 0.0f;
 
 byte SYS_GPS_countPositionSuccess = 0;
 bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
-bool OSD_isRenderAllow = true; //false=>waiting for next Vsync interrupt event
 
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
 uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
-void setup() {
-  OSD_init();
+char screen[480];          // Main screen ram for MAX7456
+char screenBuffer[20];     // MAX7456
+
+void setup() { 
+  MAX7456SETHARDWAREPORTS
+  delay(1000);
+  MAX7456Setup();
   SPORT_init();
 #ifdef DEBUG
   Serial.begin(9600);

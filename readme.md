@@ -1,4 +1,6 @@
 sportOSD - s.port decoder for minimOSD or micro-minimOSD
 
-/libs - library for Arduino IDE
-/Max7456WriteFONT   - upload font to MAX
+
+1. upload MWOSD 
+2. start MWOSD_GUI and upload font (default, large, bold)
+3. upload sportOSD (MAX7456 has proper font-table)
