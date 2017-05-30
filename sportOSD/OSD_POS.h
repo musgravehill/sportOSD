@@ -1,6 +1,8 @@
 
-#define OSD_POS_ALERT_GPS_NOT LINE08 + 10 
-#define OSD_POS_ACC_V LINE16+0  
+#define OSD_POS_ALERT_GPS_NOT LINE10 + 7
+#define OSD_POS_ACC_V LINE15+1
+#define OSD_POS_RSSI   LINE15+24
+#define OSD_POS_SPEED LINE08+1 
 
 
 #define LINE      30

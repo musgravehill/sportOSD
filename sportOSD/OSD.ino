@@ -1,18 +1,37 @@
 
 void OSD_render() {
   OSD_homeFixed();
+  OSD_PARAMS();
 
-
-
-  
   MAX7456_DrawScreen();
+}
+
+void OSD_PARAMS() {
+  //acc volt
+  SYS_ACC_V = 10.567888;
+  ItoaPadded(SYS_ACC_V*10, screenBuffer, 4, 3);     // 99.9
+  screenBuffer[4] = SYM_VOLT;
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ACC_V));
+
+  //RSSI
+  SYS_RSSI=120; 
+  ItoaUnPadded(SYS_RSSI, screenBuffer , 4, 4);
+  screenBuffer[3] = SYM_RSSI;   
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_RSSI));
+
+  //SPEED
+  SYS_GPS_NOW_speed=18;
+  ItoaUnPadded(SYS_GPS_NOW_speed, screenBuffer , 3, 3);
+  screenBuffer[2] = SYM_MS;    
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_SPEED));
+   
+
 }
 
 void OSD_homeFixed() {
   if (!SYS_GPS_isHomeFixed) {
-    MAX7456_WriteString("GPS HOME", getPosition(OSD_POS_ALERT_GPS_NOT));
+    MAX7456_WriteString("GPS HOME WAIT...", getPosition(OSD_POS_ALERT_GPS_NOT));
   }
-  displayAmperage();
 }
 
 /*
@@ -21,8 +40,7 @@ void OSD_homeFixed() {
   int16_t SYS_GPS_NOW_course_over_ground = 0; //0..360 degree 0=North
   int16_t SYS_GPS_NOW_speed = 0;
   int16_t SYS_GPS_NOW_altitude = 0;
-  byte SYS_RSSI = 0;
-  float SYS_ACC_V = 0.0f;
+   
 */
 
 
