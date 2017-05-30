@@ -2,6 +2,7 @@
 void OSD_render() {
   OSD_homeFixed();
   OSD_PARAMS();
+  OSD_GPS();
 
   MAX7456_DrawScreen();
 }
@@ -9,22 +10,35 @@ void OSD_render() {
 void OSD_PARAMS() {
   //acc volt
   SYS_ACC_V = 10.567888;
-  ItoaPadded(SYS_ACC_V*10, screenBuffer, 4, 3);     // 99.9
+  ItoaPadded(SYS_ACC_V * 10, screenBuffer, 4, 3);   // 99.9
   screenBuffer[4] = SYM_VOLT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ACC_V));
 
   //RSSI
-  SYS_RSSI=120; 
+  SYS_RSSI = 120;
   ItoaUnPadded(SYS_RSSI, screenBuffer , 4, 4);
-  screenBuffer[3] = SYM_RSSI;   
+  screenBuffer[3] = SYM_RSSI;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_RSSI));
 
   //SPEED
-  SYS_GPS_NOW_speed=18;
+  SYS_GPS_NOW_speed = 18;
   ItoaUnPadded(SYS_GPS_NOW_speed, screenBuffer , 3, 3);
-  screenBuffer[2] = SYM_MS;    
+  screenBuffer[2] = SYM_MS;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_SPEED));
+}
+
+void OSD_GPS() {
+  // HOME_azimuth
+  if (SYS_GPS_HOME_azimuth) {
+  } 
+  else if (SYS_GPS_HOME_azimuth) {
+  } 
+  else {
+    
+  }
+  MAX7456_WriteString(SYM_HOME, getPosition(OSD_POS_HOME_AZIMUTH));
    
+  
 
 }
 
@@ -40,7 +54,7 @@ void OSD_homeFixed() {
   int16_t SYS_GPS_NOW_course_over_ground = 0; //0..360 degree 0=North
   int16_t SYS_GPS_NOW_speed = 0;
   int16_t SYS_GPS_NOW_altitude = 0;
-   
+
 */
 
 
