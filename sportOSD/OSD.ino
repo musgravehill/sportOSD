@@ -1,15 +1,18 @@
 
 void OSD_render() {
+  OSD_homeFixed();
+
+
+
+  
   MAX7456_DrawScreen();
 }
 
-
-//displayAmperage();
-//displayWatt();
 void OSD_homeFixed() {
   if (!SYS_GPS_isHomeFixed) {
-    
+    MAX7456_WriteString("GPS HOME", getPosition(OSD_POS_ALERT_GPS_NOT));
   }
+  displayAmperage();
 }
 
 /*

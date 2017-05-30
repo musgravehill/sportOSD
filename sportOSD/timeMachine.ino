@@ -18,7 +18,7 @@ void TIMEMACHINE_250ms() {
 }
 
 void  TIMEMACHINE_1000ms() {
-  GPS_update_home_distance_and_home_azimuth();
+  GPS_update_home_distance_and_home_azimuth();  
 #ifdef DEBUG
   SPORT_debug();
   SYS_debug();
