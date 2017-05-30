@@ -13,16 +13,15 @@ void setup()
   SPI.begin();
 
   osd.init(6);
-  osd.setDisplayOffsets(60, 18);
+  osd.setDisplayOffsets(30, 30);
   osd.setBlinkParams(_8fields, _BT_BT);
-  osd.activateOSD();
-  osd.clearScreen();
+  osd.activateOSD();   
 
   /*int posX = 1; int posY = 1;
   for (int i = 0 ; i <= 0xff; i++)  {
     osd.printMax7456Char(i, posX, posY, true);
     posX++;
-    if (posX > 20) {
+    if (posX > 23) {
       posX = 1;
       posY++;
     }
@@ -45,10 +44,10 @@ void loop()
 {
 
 
-  counter = millis()/1000;
+  //counter = millis()/1000;
 
-  osd.print(int(counter/60),10,6,2,0,false,true);
-  osd.print(int(counter%60),13,6,2,0,false,true);
+  //osd.print(int(counter/60),10,6,2,0,false,true);
+  //osd.print(int(counter%60),13,6,2,0,false,true);
 
-  delay(100);
+  //delay(100);
 }

@@ -325,14 +325,14 @@ void Max7456::print(double value, byte x, byte y, byte before, byte after, byte 
 //-----------------------------------------------------------------------------
 byte Max7456::giveMax7456CharFromAsciiChar(char ascii)
 {
-/*#ifdef MAX7456_TABLE_ASCII
+#ifdef MAX7456_TABLE_ASCII
 	if(ascii >= ' ' && ascii <= 'z')
 		return ascii-' ';
 	else
 		return ascii;
-#else */
+#else
 	return ascii;
- //#endif
+#endif
 }
 
 

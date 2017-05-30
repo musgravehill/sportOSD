@@ -68,7 +68,7 @@ union REG_VM0
 		 * @li 0 = NTSC
 		 * @li 1 = PAL
 		 */
-		unsigned char videoSelect : 1;
+		unsigned char videoSelect :1;
 
 		/**@brief don't care*/
 		unsigned char unused : 1;
