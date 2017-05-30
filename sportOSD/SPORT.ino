@@ -13,7 +13,7 @@ void SPORT_getData() {
   float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
   
   GPS_home_position_fix();
-  GPS_update_home_distance_and_home_azimuth();
+  
   
 }
 

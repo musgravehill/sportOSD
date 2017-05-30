@@ -1,6 +1,6 @@
 #include <SPI.h>  //<> => standart location
 
-#include "defs.h"
+#include "OSD_POS.h"
 
 #include "FrSkySportTelemetry/FrSkySportSensor.h"
 #include "FrSkySportTelemetry/FrSkySportSensorXjt.h"

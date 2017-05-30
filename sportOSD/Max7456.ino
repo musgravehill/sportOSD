@@ -1,4 +1,4 @@
-#include "bitarray.h"
+
 
 #if defined WHITEBRIGHTNESS | defined BLACKBRIGHTNESS
   #ifndef WHITEBRIGHTNESS

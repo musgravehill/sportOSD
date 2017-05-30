@@ -1,5 +1,5 @@
 
-// UPLOAD FONT TABLE, run RC-mini\FRSKY-SPORT\Max7456WriteFONT
+// UPLOAD FONT TABLE by mwOSD 1.7 
 
 #include "incl.h"
 
@@ -28,8 +28,6 @@ bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
 uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
 uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
-char screen[480];          // Main screen ram for MAX7456
-char screenBuffer[20];     // MAX7456
 
 void setup() { 
   MAX7456SETHARDWAREPORTS
