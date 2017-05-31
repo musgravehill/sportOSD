@@ -1,9 +1,9 @@
 void TIMEMACHINE_loop() {
   uint32_t  TIMEMACHINE_currMillis = millis();
 
-  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_250ms) > 250L) {
-    TIMEMACHINE_250ms();
-    TIMEMACHINE_prevMicros_250ms = TIMEMACHINE_currMillis;
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_333ms) > 333L) {
+    TIMEMACHINE_333ms();
+    TIMEMACHINE_prevMicros_333ms = TIMEMACHINE_currMillis;
   }
 
   if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_1000ms) > 1000L) {
@@ -13,7 +13,7 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_250ms() {
+void TIMEMACHINE_333ms() {
   SPORT_getData();
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;

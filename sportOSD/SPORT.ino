@@ -1,19 +1,20 @@
 
 void SPORT_init() {
-  decoder.begin(PIN_SPORT_IN, &xjt);
+  decoder.begin(PIN_SPORT_IN, &xjt, &sensor_fcs_video);
 }
 
 void SPORT_getData() {
-  float SYS_GPS_NOW_lat = xjt.getLat();
-  float SYS_GPS_NOW_long = xjt.getLon();
-  int16_t SYS_GPS_NOW_cog = xjt.getCog(); //0..360 degree 0=North
-  int16_t SYS_GPS_NOW_speed = xjt.getSpeed();
-  int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
-  byte SYS_RSSI =  xjt.getRssi();
-  float SYS_MAIN_V = xjt.getVoltage(); //FAS sensor, Amper=0
-  //SYS_VID_V;
+  SYS_GPS_NOW_lat = xjt.getLat();
+  SYS_GPS_NOW_long = xjt.getLon();
+  SYS_GPS_NOW_cog = xjt.getCog(); //0..360 degree 0=North
+  SYS_GPS_NOW_speed = xjt.getSpeed();
+  SYS_GPS_NOW_altitude = xjt.getAltitude();
+  SYS_RSSI =  xjt.getRssi();
+  SYS_MAIN_V = xjt.getVoltage(); //FAS sensor, Amper=0
+  SYS_VID_V = sensor_fcs_video.getVoltage(); //FAS sensor, Amper=0
 
-  SYS_GPS_NOW_cog = (SYS_GPS_NOW_cog == 360) ? 0 : SYS_GPS_NOW_cog;
+  //normalize COG
+  SYS_GPS_NOW_cog = (SYS_GPS_NOW_cog >= 360) ? 0 : SYS_GPS_NOW_cog;
 
   GPS_home_position_fix();
 }

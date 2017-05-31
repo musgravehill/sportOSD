@@ -8,7 +8,7 @@
 
 #include "incl.h"
 
-
+FrSkySportSensorFcs sensor_fcs_video(FrSkySportSensor::ID15);
 FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
 FrSkySportDecoder decoder; // Create decoder object without polling
 
@@ -33,7 +33,7 @@ bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
 
 
 //TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_333ms = 0L;
 uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
 

@@ -24,6 +24,7 @@ void GPS_update_home_distance_and_home_azimuth() {
   // Courtesy of Maarten Lamers
   double SYS_GPS_HOME_lat_rad = radians(SYS_GPS_HOME_lat);
   double SYS_GPS_NOW_lat_rad = radians(SYS_GPS_NOW_lat);
+  
   double delta = radians(SYS_GPS_HOME_long - SYS_GPS_NOW_long);
   double sdlong = sin(delta);
   double cdlong = cos(delta);
@@ -49,7 +50,8 @@ void GPS_update_home_distance_and_home_azimuth() {
     a2 += TWO_PI;
   }
   SYS_GPS_HOME_azimuth = degrees(a2);
-  SYS_GPS_HOME_azimuth = (SYS_GPS_HOME_azimuth == 360) ? 0 : SYS_GPS_HOME_azimuth;
+  SYS_GPS_HOME_azimuth = (SYS_GPS_HOME_azimuth < 0) ? 0 : SYS_GPS_HOME_azimuth;
+  SYS_GPS_HOME_azimuth = (SYS_GPS_HOME_azimuth >= 360) ? 0 : SYS_GPS_HOME_azimuth;
 }
 
 #ifdef GPS_MOCK
@@ -87,11 +89,11 @@ void GPS_mock() {
   SYS_GPS_NOW_speed = 18;
   SYS_GPS_HOME_dist = 9999;
   SYS_GPS_NOW_altitude = 1200;
-  
+
   SYS_GPS_HOME_lat = 57.720138;
   SYS_GPS_HOME_long = 39.734516;
   SYS_GPS_NOW_cog = random(0, 360);
-  SYS_GPS_isHomeFixed = true;  
+  SYS_GPS_isHomeFixed = true;
 
   if (SYS_GPS_MOCK_counter < 64) {
     Serial.println(F("GPS MOCK N"));
