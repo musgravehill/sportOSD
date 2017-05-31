@@ -1,5 +1,5 @@
 
-// UPLOAD FONT TABLE by mwOSD 1.7 
+// UPLOAD FONT TABLE by mwOSD 1.7
 
 #include "incl.h"
 
@@ -8,8 +8,8 @@ FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
 FrSkySportDecoder decoder; // Create decoder object without polling
 
 
-float SYS_GPS_HOME_lat = 57.55555; //HOME TODO
-float SYS_GPS_HOME_long = 39.55555; //HOME TODO
+float SYS_GPS_HOME_lat = 0.0f; //HOME TODO
+float SYS_GPS_HOME_long = 0.0f; //HOME TODO
 
 float SYS_GPS_NOW_lat = 0.0f;
 float SYS_GPS_NOW_long = 0.0f;
@@ -23,21 +23,21 @@ float SYS_ACC_V = 0.0f;
 
 byte SYS_GPS_countPositionSuccess = 0;
 bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
+byte SYS_GPS_MOCK_counter = 0;
 
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
 uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
 
-void setup() { 
+void setup() {
   MAX7456SETHARDWAREPORTS
   delay(1000);
   MAX7456Setup();
   SPORT_init();
 #ifdef DEBUG
   Serial.begin(9600);
-#endif
-  GPS_mock();
+#endif  
 }
 
 void loop() {
