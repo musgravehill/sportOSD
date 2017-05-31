@@ -11,6 +11,9 @@ void OSD_PARAMS() {
   ItoaUnPadded(SYS_ACC_V * 100, screenBuffer, 5, 3); // 12.59
   screenBuffer[5] = SYM_VOLT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ACC_V));
+  //SYM_MAIN_BATT
+  //SYM_VID_BAT
+
   //RSSI
   ItoaUnPadded(SYS_RSSI, screenBuffer , 4, 4);
   screenBuffer[3] = SYM_RSSI;
@@ -36,7 +39,20 @@ void OSD_GPS() {
   ItoaUnPadded(SYS_GPS_NOW_altitude, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_ALT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ALT));
+  //heading compass
+  memset(screenBuffer, 0, sizeof(screenBuffer));
+  screenBuffer[0] = 0x76;
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_CURSOR));
 
+  /*
+    OSD_POS_HEADING_BLOCK
+    SYM_HEADING_N
+    SYM_HEADING_S
+    SYM_HEADING_E
+    SYM_HEADING_W
+    SYM_HEADING_DIVIDED_LINE
+    SYM_HEADING_LINE
+  */
 }
 
 void OSD_homeFixed() {
@@ -56,31 +72,12 @@ void OSD_homeFixed() {
 
 
 
+
+
+//=============================HELPERS====================================================================================
 uint16_t getPosition(uint16_t pos) {
   return pos & POS_MASK;
 }
-
-void displayAmperage(void)
-{
-  uint16_t amperage = 8;
-  ItoaPadded(amperage, screenBuffer, 5, 4);     // 999.9 ampere max!
-  screenBuffer[5] = SYM_AMP;
-  screenBuffer[6] = SYM_ARROW_SOUTH;
-  MAX7456_WriteString(screenBuffer, getPosition(LINE02));
-}
-
-
-void displayWatt(void) {
-  uint16_t WhrPosition = 90;
-  uint16_t watts = 123;
-  ItoaPadded(watts, screenBuffer + 1 , 5, 5);
-  screenBuffer[0] = SYM_BLANK;
-  screenBuffer[5] = SYM_WATT;
-  screenBuffer[6] = 0;
-  MAX7456_WriteString(screenBuffer, WhrPosition);
-}
-
-//=============================HELPERS====================================================================================
 
 char *ItoaPadded(int val, char *str, uint8_t bytes, uint8_t decimalpos)  {
   // Val to convert
