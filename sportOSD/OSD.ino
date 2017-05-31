@@ -25,7 +25,7 @@ void OSD_PARAMS() {
 }
 
 void OSD_GPS() {
-  byte pos_tmp;
+  int8_t pos_tmp;
   // ARROW to home
   pos_tmp = (GPS_HOME_arrow_degree - 11) / 22;
   pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
@@ -40,15 +40,15 @@ void OSD_GPS() {
   ItoaUnPadded(SYS_GPS_NOW_altitude, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_ALT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ALT));
-  //heading compass
+  //heading compass center cursor
   memset(screenBuffer, 0, sizeof(screenBuffer));
   screenBuffer[0] = 0x76;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_CURSOR));
-
+  //compass
   pos_tmp = (SYS_GPS_NOW_cog - 11) / 22; //16 positions, 360\16 = 22 degree for each position
-  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
-  byte arr_LR;
-  for (byte i = -4; i <= 4; i++) {
+  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;  
+  int8_t arr_LR;  
+  for (int8_t i = -4; i <= 4; i++) {    
     arr_LR = pos_tmp + i;
     if (arr_LR < 0) {
       arr_LR = 16 + arr_LR;
@@ -56,10 +56,10 @@ void OSD_GPS() {
     else if (arr_LR > 15) {
       arr_LR = arr_LR - 16;
     }
-    screenBuffer[(i + 4)] = HEADING_SYMBOLS[arr_LR];
+    screenBuffer[(i+4)] = HEADING_SYMBOLS[arr_LR];    
   }
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_COMPASS));
-  
+
   /*
     OSD_POS_HEADING_BLOCK
     SYM_HEADING_N
