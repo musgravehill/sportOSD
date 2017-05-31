@@ -47,7 +47,7 @@ void SYS_debug() {
   Serial.print("SYS_GPS_NOW_speed ="); Serial.println(SYS_GPS_NOW_speed, DEC);
   Serial.print("SYS_GPS_NOW_altitude ="); Serial.println(SYS_GPS_NOW_altitude, DEC);
   Serial.print("SYS_RSSI ="); Serial.println(SYS_RSSI, DEC);
-  Serial.print("SYS_ACC_V ="); Serial.println(SYS_ACC_V, DEC);
+  Serial.print("SYS_MAIN_V ="); Serial.println(SYS_MAIN_V, DEC);
   Serial.println();
   Serial.println();
 }

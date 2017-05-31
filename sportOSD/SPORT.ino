@@ -10,7 +10,8 @@ void SPORT_getData() {
   int16_t SYS_GPS_NOW_speed = xjt.getSpeed();
   int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
   byte SYS_RSSI =  xjt.getRssi();
-  float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
+  float SYS_MAIN_V = xjt.getVoltage(); //FAS sensor, Amper=0
+  //SYS_VID_V;
 
   SYS_GPS_NOW_cog = (SYS_GPS_NOW_cog == 360) ? 0 : SYS_GPS_NOW_cog;
 

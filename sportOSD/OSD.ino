@@ -7,18 +7,24 @@ void OSD_render() {
 }
 
 void OSD_PARAMS() {
-  //acc volt
-  ItoaUnPadded(SYS_ACC_V * 100, screenBuffer, 5, 3); // 12.59
-  screenBuffer[5] = SYM_VOLT;
-  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ACC_V));
-  //SYM_MAIN_BATT
-  //SYM_VID_BAT
+  //main volt
+  memset(screenBuffer, 0, sizeof(screenBuffer));
+  ItoaUnPadded(SYS_MAIN_V * 100, screenBuffer, 6, 4); // 12.59
+  screenBuffer[0] = SYM_MAIN_BATT;
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_MAIN_V));
+  //video volt
+  memset(screenBuffer, 0, sizeof(screenBuffer));
+  ItoaUnPadded(SYS_VID_V * 100, screenBuffer, 6, 4); // 12.59
+  screenBuffer[0] = SYM_VID_BAT;
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_VID_V));
 
   //RSSI
+  memset(screenBuffer, 0, sizeof(screenBuffer));
   ItoaUnPadded(SYS_RSSI, screenBuffer , 4, 4);
   screenBuffer[3] = SYM_RSSI;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_RSSI));
   //SPEED
+  memset(screenBuffer, 0, sizeof(screenBuffer));
   ItoaUnPadded(SYS_GPS_NOW_speed, screenBuffer , 3, 3);
   screenBuffer[2] = SYM_MS;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_SPEED));
@@ -27,16 +33,18 @@ void OSD_PARAMS() {
 void OSD_GPS() {
   int8_t pos_tmp;
   // ARROW to home
+  memset(screenBuffer, 0, sizeof(screenBuffer));
   pos_tmp = (GPS_HOME_arrow_degree - 11) / 22;
   pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
-  memset(screenBuffer, 0, sizeof(screenBuffer));
   screenBuffer[0] = ARROW_SYMBOLS[pos_tmp];
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
   //dist to home
+  memset(screenBuffer, 0, sizeof(screenBuffer));
   ItoaUnPadded(SYS_GPS_HOME_dist, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_M;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_DIST));
   //alt
+  memset(screenBuffer, 0, sizeof(screenBuffer));
   ItoaUnPadded(SYS_GPS_NOW_altitude, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_ALT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ALT));
@@ -46,9 +54,9 @@ void OSD_GPS() {
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_CURSOR));
   //compass
   pos_tmp = (SYS_GPS_NOW_cog - 11) / 22; //16 positions, 360\16 = 22 degree for each position
-  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;  
-  int8_t arr_LR;  
-  for (int8_t i = -4; i <= 4; i++) {    
+  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
+  int8_t arr_LR;
+  for (int8_t i = -4; i <= 4; i++) {
     arr_LR = pos_tmp + i;
     if (arr_LR < 0) {
       arr_LR = 16 + arr_LR;
@@ -56,7 +64,7 @@ void OSD_GPS() {
     else if (arr_LR > 15) {
       arr_LR = arr_LR - 16;
     }
-    screenBuffer[(i+4)] = HEADING_SYMBOLS[arr_LR];    
+    screenBuffer[(i + 4)] = HEADING_SYMBOLS[arr_LR];
   }
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_COMPASS));
 

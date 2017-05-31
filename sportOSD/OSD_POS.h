@@ -8,7 +8,8 @@
 //v left
 #define OSD_POS_SPEED LINE08+1
 #define OSD_POS_ALT LINE10+1
-#define OSD_POS_ACC_V LINE15+1
+#define OSD_POS_VID_V LINE14+1
+#define OSD_POS_MAIN_V LINE15+1
 //v right
 #define OSD_POS_RSSI   LINE15+24
 
