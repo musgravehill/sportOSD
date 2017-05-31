@@ -1,11 +1,16 @@
 
-
-#define OSD_POS_HOME_DIST LINE05+13
-#define OSD_POS_HOME_AZIMUTH LINE06+14
+//v center
+#define OSD_POS_HOME_AZIMUTH LINE05+13
+#define OSD_POS_HOME_DIST LINE05+15
 #define OSD_POS_ALERT_GPS_NOT LINE13 + 7
+//v left
+#define OSD_POS_SPEED LINE08+1
+#define OSD_POS_ALT LINE10+1
 #define OSD_POS_ACC_V LINE15+1
+//v right
 #define OSD_POS_RSSI   LINE15+24
-#define OSD_POS_SPEED LINE08+1 
+
+
 
 
 #define LINE      30
