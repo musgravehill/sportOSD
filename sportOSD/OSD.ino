@@ -29,100 +29,18 @@ void OSD_PARAMS() {
 
 void OSD_GPS() {
   // ARROW to home
-  byte home_arrow_pos = GPS_HOME_arrow_degree / 22;
+  byte home_arrow_pos = (GPS_HOME_arrow_degree - 11) / 22;
   home_arrow_pos = (home_arrow_pos < 0 || home_arrow_pos > 15) ? 0 : home_arrow_pos;
-  const char arrow_symbols[16] PROGMEM = {
-    SYM_ARROW_NORTH, SYM_ARROW_8, SYM_ARROW_7, SYM_ARROW_6, SYM_ARROW_EAST, SYM_ARROW_4, SYM_ARROW_3, SYM_ARROW_2,
-    SYM_ARROW_SOUTH, SYM_ARROW_16, SYM_ARROW_15, SYM_ARROW_14, SYM_ARROW_WEST, SYM_ARROW_12, SYM_ARROW_11, SYM_ARROW_10
-  };
-
   memset(screenBuffer, 0, sizeof(screenBuffer));
-  ItoaUnPadded(GPS_HOME_arrow_degree, screenBuffer , 3, 3);
-  screenBuffer[3] = arrow_symbols[home_arrow_pos];
+  screenBuffer[0] = ARROW_SYMBOLS[home_arrow_pos];
+   Serial.println(home_arrow_pos, DEC);
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
-
-  /*
-    if (GPS_HOME_arrow_degree < 22) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >= 22  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
-      home_arrow_def = ;
-    }
-  */
-  /*
-    #define SYM_ARROW_SOUTH 0X60
-    #define SYM_ARROW_2 0X61
-    #define SYM_ARROW_3 0X62
-    #define SYM_ARROW_4 0X63
-    #define SYM_ARROW_EAST 0X64
-    #define SYM_ARROW_6 0X65
-    #define SYM_ARROW_7 0X66
-    #define SYM_ARROW_8 0X67
-    #define SYM_ARROW_NORTH 0X68
-    #define SYM_ARROW_10 0X69
-    #define SYM_ARROW_11 0X6A
-    #define SYM_ARROW_12 0X6B
-    #define SYM_ARROW_WEST 0X6C
-    #define SYM_ARROW_14 0X6D
-    #define SYM_ARROW_15 0X6E
-    #define SYM_ARROW_16 0X6F
-  */
-
-
-
-
-
 
 }
 
 void OSD_homeFixed() {
   if (!SYS_GPS_isHomeFixed) {
     MAX7456_WriteString("GPS HOME WAIT...", getPosition(OSD_POS_ALERT_GPS_NOT));
-  }
-  else {
-    MAX7456_WriteString("GPS HOME OK", getPosition(OSD_POS_ALERT_GPS_NOT));
   }
 }
 

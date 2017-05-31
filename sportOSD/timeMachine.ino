@@ -17,16 +17,12 @@ void TIMEMACHINE_250ms() {
   SPORT_getData();
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
-  GPS_HOME_arrow_degree++;
-  if (GPS_HOME_arrow_degree > 359) {
-    GPS_HOME_arrow_degree = 0;
-  }
 #endif
 }
 
 void  TIMEMACHINE_1000ms() {
   GPS_update_home_distance_and_home_azimuth();
-  //GPS_HOME_arrow_degree_calc();
+  GPS_HOME_arrow_degree_calc();
 #ifdef GPS_MOCK
   GPS_mock();
 #endif

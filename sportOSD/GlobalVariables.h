@@ -8,6 +8,8 @@
 byte SYS_GPS_MOCK_counter = 0;
 #endif
 
+
+
 #define DECIMAL '.'
 
 #define USE_VSYNC   // Removes sparklies as updates screen during blanking time period. 

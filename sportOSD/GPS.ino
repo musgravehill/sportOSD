@@ -106,9 +106,10 @@ void GPS_mock() {
     SYS_GPS_NOW_lat = 57.720548;//to E
     SYS_GPS_NOW_long =  39.744558;
   }
-  Serial.print(F("SYS_GPS_HOME_dist =")); Serial.println(SYS_GPS_HOME_dist, DEC);
-  Serial.print(F("SYS_GPS_HOME_azimuth =")); Serial.println(SYS_GPS_HOME_azimuth, DEC);
-  Serial.print(F("SYS_GPS_NOW_cog =")); Serial.println(SYS_GPS_NOW_cog, DEC);
+  Serial.print(F("SYS_GPS_HOME_dist=")); Serial.println(SYS_GPS_HOME_dist, DEC);
+  Serial.print(F("SYS_GPS_HOME_azimuth=")); Serial.println(SYS_GPS_HOME_azimuth, DEC);
+  Serial.print(F("SYS_GPS_NOW_cog=")); Serial.println(SYS_GPS_NOW_cog, DEC);
+  Serial.print(F("GPS_HOME_arrow_degree=")); Serial.println(GPS_HOME_arrow_degree, DEC);
   Serial.println();
 }
 #endif
