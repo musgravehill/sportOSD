@@ -15,12 +15,17 @@ void TIMEMACHINE_loop() {
 
 void TIMEMACHINE_250ms() {
   SPORT_getData();
+#ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
+#endif
 }
 
 void  TIMEMACHINE_1000ms() {
+
+  GPS_update_home_distance_and_home_azimuth();
+#ifdef GPS_MOCK
   GPS_mock();
-  GPS_update_home_distance_and_home_azimuth();       
+#endif
 #ifdef DEBUG
   SPORT_debug();
   SYS_debug();

@@ -11,13 +11,13 @@ void SPORT_getData() {
   int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
   byte SYS_RSSI =  xjt.getRssi();
   float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
-  
+
   GPS_home_position_fix();
-  
-  
+
+
 }
 
-
+#ifdef DEBUG
 void SPORT_debug() {
   // Read and decode the telemetry data, note that the data will only be decoded for sensors
   // that that have been passed to the begin method. Print the AppID of the decoded data.
@@ -47,6 +47,7 @@ void SPORT_debug() {
   Serial.print("; date/time = "); Serial.println(dateTimeStr); // Date (year - need to add 2000, month, day) and time (hour, minute, second)
   Serial.println("");
 }
+#endif
 
 /*
   // System data

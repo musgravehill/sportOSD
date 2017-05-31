@@ -35,7 +35,7 @@ void setup() {
   delay(1000);
   MAX7456Setup();
   SPORT_init();
-#ifdef DEBUG
+#ifdef DEBUG || GPS_MOCK 
   Serial.begin(9600);
 #endif  
 }
