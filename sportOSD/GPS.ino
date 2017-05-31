@@ -11,6 +11,11 @@ void GPS_home_position_fix() {
   }
 }
 
+void GPS_HOME_arrow_degree_calc() {
+  GPS_HOME_arrow_degree = SYS_GPS_HOME_azimuth - SYS_GPS_NOW_cog;
+  GPS_HOME_arrow_degree = (GPS_HOME_arrow_degree < 0) ? GPS_HOME_arrow_degree + 360 : GPS_HOME_arrow_degree;
+}
+
 void GPS_update_home_distance_and_home_azimuth() {
   // returns distance in meters between two positions, both specified
   // as signed decimal-degrees latitude and longitude. Uses great-circle
@@ -44,6 +49,7 @@ void GPS_update_home_distance_and_home_azimuth() {
     a2 += TWO_PI;
   }
   SYS_GPS_HOME_azimuth = degrees(a2);
+  SYS_GPS_HOME_azimuth = (SYS_GPS_HOME_azimuth == 360) ? 0 : SYS_GPS_HOME_azimuth;
 }
 
 #ifdef GPS_MOCK
@@ -58,27 +64,27 @@ void GPS_mock() {
     GPS MOCK N
     SYS_GPS_HOME_dist =348
     SYS_GPS_HOME_azimuth =185
-    SYS_GPS_NOW_course_over_ground =0
+    SYS_GPS_NOW_cog =0
 
     GPS MOCK W
     SYS_GPS_HOME_dist =31
     SYS_GPS_HOME_azimuth =75
-    SYS_GPS_NOW_course_over_ground =0
+    SYS_GPS_NOW_cog =0
 
     GPS MOCK S
     SYS_GPS_HOME_dist =45
     SYS_GPS_HOME_azimuth =3
-    SYS_GPS_NOW_course_over_ground =0
+    SYS_GPS_NOW_cog =0
 
     GPS MOCK E
     SYS_GPS_HOME_dist =45
     SYS_GPS_HOME_azimuth =3
-    SYS_GPS_NOW_course_over_ground =0
+    SYS_GPS_NOW_cog =0
 
   */
   SYS_GPS_HOME_lat = 57.720138;
   SYS_GPS_HOME_long = 39.734516;
-  SYS_GPS_isHomeFixed = true;
+  SYS_GPS_isHomeFixed = true;  
 
   if (SYS_GPS_MOCK_counter < 64) {
     Serial.println(F("GPS MOCK N"));
@@ -102,7 +108,7 @@ void GPS_mock() {
   }
   Serial.print(F("SYS_GPS_HOME_dist =")); Serial.println(SYS_GPS_HOME_dist, DEC);
   Serial.print(F("SYS_GPS_HOME_azimuth =")); Serial.println(SYS_GPS_HOME_azimuth, DEC);
-  Serial.print(F("SYS_GPS_NOW_course_over_ground =")); Serial.println(SYS_GPS_NOW_course_over_ground, DEC);
+  Serial.print(F("SYS_GPS_NOW_cog =")); Serial.println(SYS_GPS_NOW_cog, DEC);
   Serial.println();
 }
 #endif

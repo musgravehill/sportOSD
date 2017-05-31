@@ -1,6 +1,10 @@
 
 // UPLOAD FONT TABLE by mwOSD 1.7
 
+//TODO 
+// 0. avg-filter for alt, cog, home-azimuth, gps-lat\long 
+// gps-lat\long avg-filter for HOME_POS init!!!!!
+
 #include "incl.h"
 
 
@@ -15,11 +19,12 @@ float SYS_GPS_NOW_lat = 0.0f;
 float SYS_GPS_NOW_long = 0.0f;
 int16_t SYS_GPS_HOME_dist = 0; //in metr
 int16_t SYS_GPS_HOME_azimuth = 0; //0..360 degree ARROW TO HOME
-int16_t SYS_GPS_NOW_course_over_ground = 0; //0..360 degree 0=North
+int16_t SYS_GPS_NOW_cog = 0; //0..360 degree 0=North
 int16_t SYS_GPS_NOW_speed = 0;
 int16_t SYS_GPS_NOW_altitude = 0;
 byte SYS_RSSI = 0;
 float SYS_ACC_V = 0.0f;
+int16_t GPS_HOME_arrow_degree = 0; //0=to screen top, 180= to screen bottom
 
 byte SYS_GPS_countPositionSuccess = 0;
 bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored

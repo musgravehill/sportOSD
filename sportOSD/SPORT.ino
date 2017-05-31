@@ -6,15 +6,15 @@ void SPORT_init() {
 void SPORT_getData() {
   float SYS_GPS_NOW_lat = xjt.getLat();
   float SYS_GPS_NOW_long = xjt.getLon();
-  int16_t SYS_GPS_NOW_course_over_ground = xjt.getCog(); //0..360 degree 0=North
+  int16_t SYS_GPS_NOW_cog = xjt.getCog(); //0..360 degree 0=North
   int16_t SYS_GPS_NOW_speed = xjt.getSpeed();
   int16_t SYS_GPS_NOW_altitude = xjt.getAltitude();
   byte SYS_RSSI =  xjt.getRssi();
   float SYS_ACC_V = xjt.getVoltage(); //FAS sensor, Amper=0
 
+  SYS_GPS_NOW_cog = (SYS_GPS_NOW_cog == 360) ? 0 : SYS_GPS_NOW_cog;
+
   GPS_home_position_fix();
-
-
 }
 
 #ifdef DEBUG

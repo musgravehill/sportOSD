@@ -14,8 +14,8 @@
 #include <SoftwareSerial.h>
 
 #include <avr/pgmspace.h>
-#undef PROGMEM
-#define PROGMEM __attribute__(( section(".progmem.data") ))
+//#undef PROGMEM
+//#define PROGMEM __attribute__(( section(".progmem.data") ))
 //#include <EEPROM.h>
 #include <util/atomic.h> // For ATOMIC_BLOCK
 

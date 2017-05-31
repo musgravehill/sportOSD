@@ -28,14 +28,69 @@ void OSD_PARAMS() {
 }
 
 void OSD_GPS() {
-  // HOME_azimuth
-  if (SYS_GPS_HOME_azimuth) {
-  }
-  else if (SYS_GPS_HOME_azimuth) {
-  }
-  else {
+  // ARROW to home
+  byte home_arrow_pos = GPS_HOME_arrow_degree / 22;
+  home_arrow_pos = (home_arrow_pos < 0 || home_arrow_pos > 15) ? 0 : home_arrow_pos;
+  const char arrow_symbols[16] PROGMEM = {
+    SYM_ARROW_NORTH, SYM_ARROW_8, SYM_ARROW_7, SYM_ARROW_6, SYM_ARROW_EAST, SYM_ARROW_4, SYM_ARROW_3, SYM_ARROW_2,
+    SYM_ARROW_SOUTH, SYM_ARROW_16, SYM_ARROW_15, SYM_ARROW_14, SYM_ARROW_WEST, SYM_ARROW_12, SYM_ARROW_11, SYM_ARROW_10
+  };
 
-  }
+  memset(screenBuffer, 0, sizeof(screenBuffer));
+  ItoaUnPadded(GPS_HOME_arrow_degree, screenBuffer , 3, 3);
+  screenBuffer[3] = arrow_symbols[home_arrow_pos];
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
+
+  /*
+    if (GPS_HOME_arrow_degree < 22) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >= 22  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+    else if (GPS_HOME_arrow_degree >=  && GPS_HOME_arrow_degree < ) {
+      home_arrow_def = ;
+    }
+  */
   /*
     #define SYM_ARROW_SOUTH 0X60
     #define SYM_ARROW_2 0X61
@@ -56,9 +111,7 @@ void OSD_GPS() {
   */
 
 
-  memset(screenBuffer, 0, sizeof(screenBuffer));
-  screenBuffer[0] = SYM_HOME;
-  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
+
 
 
 
@@ -68,12 +121,15 @@ void OSD_homeFixed() {
   if (!SYS_GPS_isHomeFixed) {
     MAX7456_WriteString("GPS HOME WAIT...", getPosition(OSD_POS_ALERT_GPS_NOT));
   }
+  else {
+    MAX7456_WriteString("GPS HOME OK", getPosition(OSD_POS_ALERT_GPS_NOT));
+  }
 }
 
 /*
   int16_t SYS_GPS_HOME_dist = 0; //in metr
   int16_t SYS_GPS_HOME_azimuth = 0; //0..360 degree ARROW TO HOME
-  int16_t SYS_GPS_NOW_course_over_ground = 0; //0..360 degree 0=North
+  int16_t SYS_GPS_NOW_cog = 0; //0..360 degree 0=North
   int16_t SYS_GPS_NOW_speed = 0;
   int16_t SYS_GPS_NOW_altitude = 0;
 

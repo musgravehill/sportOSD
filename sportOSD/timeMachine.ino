@@ -17,11 +17,16 @@ void TIMEMACHINE_250ms() {
   SPORT_getData();
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
+  GPS_HOME_arrow_degree++;
+  if (GPS_HOME_arrow_degree > 359) {
+    GPS_HOME_arrow_degree = 0;
+  }
 #endif
 }
 
 void  TIMEMACHINE_1000ms() {
   GPS_update_home_distance_and_home_azimuth();
+  //GPS_HOME_arrow_degree_calc();
 #ifdef GPS_MOCK
   GPS_mock();
 #endif
@@ -42,7 +47,7 @@ void SYS_debug() {
   Serial.print("SYS_GPS_NOW_long ="); Serial.println(SYS_GPS_NOW_long, DEC);
   Serial.print("SYS_GPS_HOME_dist ="); Serial.println(SYS_GPS_HOME_dist, DEC);
   Serial.print("SYS_GPS_HOME_azimuth ="); Serial.println(SYS_GPS_HOME_azimuth, DEC);
-  Serial.print("SYS_GPS_NOW_course_over_ground ="); Serial.println(SYS_GPS_NOW_course_over_ground, DEC);
+  Serial.print("SYS_GPS_NOW_cog ="); Serial.println(SYS_GPS_NOW_cog, DEC);
   Serial.print("SYS_GPS_NOW_speed ="); Serial.println(SYS_GPS_NOW_speed, DEC);
   Serial.print("SYS_GPS_NOW_altitude ="); Serial.println(SYS_GPS_NOW_altitude, DEC);
   Serial.print("SYS_RSSI ="); Serial.println(SYS_RSSI, DEC);
