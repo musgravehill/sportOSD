@@ -1,9 +1,14 @@
 
 //#define DEBUG true
+//#define GPS_MOCK true
 
 #define PIN_SPORT_IN  FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_5
 
-#define DECIMAL '.' 
+#ifdef GPS_MOCK
+byte SYS_GPS_MOCK_counter = 0;
+#endif
+
+#define DECIMAL '.'
 
 #define USE_VSYNC   // Removes sparklies as updates screen during blanking time period. 
 #define MAX7456ENABLE    PORTD&=B10111111;

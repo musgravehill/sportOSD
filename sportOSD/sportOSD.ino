@@ -23,7 +23,7 @@ float SYS_ACC_V = 0.0f;
 
 byte SYS_GPS_countPositionSuccess = 0;
 bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
-byte SYS_GPS_MOCK_counter = 0;
+
 
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_250ms = 0L;
@@ -35,9 +35,12 @@ void setup() {
   delay(1000);
   MAX7456Setup();
   SPORT_init();
-#ifdef DEBUG || GPS_MOCK 
+#ifdef DEBUG
   Serial.begin(9600);
-#endif  
+#endif
+#ifdef GPS_MOCK
+  Serial.begin(9600);
+#endif
 }
 
 void loop() {

@@ -21,7 +21,6 @@ void TIMEMACHINE_250ms() {
 }
 
 void  TIMEMACHINE_1000ms() {
-
   GPS_update_home_distance_and_home_azimuth();
 #ifdef GPS_MOCK
   GPS_mock();

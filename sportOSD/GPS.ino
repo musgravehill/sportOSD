@@ -34,10 +34,10 @@ void GPS_update_home_distance_and_home_azimuth() {
   delta = atan2(delta, denom);
   SYS_GPS_HOME_dist = delta * 6372795;
 
-  double dlon = radians(SYS_GPS_NOW_long - SYS_GPS_HOME_long);
-  double a1 = sin(dlon) * cos(SYS_GPS_NOW_lat_rad);
-  double a2 = sin(SYS_GPS_HOME_lat_rad) * cos(SYS_GPS_NOW_lat_rad) * cos(dlon);
-  a2 = cos(SYS_GPS_HOME_lat_rad) * sin(SYS_GPS_NOW_lat_rad) - a2;
+  double dlon = radians(SYS_GPS_HOME_long - SYS_GPS_NOW_long);
+  double a1 = sin(dlon) * cos(SYS_GPS_HOME_lat_rad);
+  double a2 = sin(SYS_GPS_NOW_lat_rad) * cos(SYS_GPS_HOME_lat_rad) * cos(dlon);
+  a2 = cos(SYS_GPS_NOW_lat_rad) * sin(SYS_GPS_HOME_lat_rad) - a2;
   a2 = atan2(a1, a2);
   if (a2 < 0.0)
   {
@@ -55,36 +55,54 @@ void GPS_mock() {
     bottom (go to S) 43m 57.719726, 39.734472
     right (go to E) 600m 57.720548, 39.744558
 
+    GPS MOCK N
+    SYS_GPS_HOME_dist =348
+    SYS_GPS_HOME_azimuth =185
+    SYS_GPS_NOW_course_over_ground =0
+
+    GPS MOCK W
+    SYS_GPS_HOME_dist =31
+    SYS_GPS_HOME_azimuth =75
+    SYS_GPS_NOW_course_over_ground =0
+
+    GPS MOCK S
+    SYS_GPS_HOME_dist =45
+    SYS_GPS_HOME_azimuth =3
+    SYS_GPS_NOW_course_over_ground =0
+
+    GPS MOCK E
+    SYS_GPS_HOME_dist =45
+    SYS_GPS_HOME_azimuth =3
+    SYS_GPS_NOW_course_over_ground =0
+
   */
   SYS_GPS_HOME_lat = 57.720138;
   SYS_GPS_HOME_long = 39.734516;
   SYS_GPS_isHomeFixed = true;
 
-  Serial.println(F("GPS_mock() is ACTIVE"));
-
   if (SYS_GPS_MOCK_counter < 64) {
-    Serial.println(F("fly to N"));
+    Serial.println(F("GPS MOCK N"));
     SYS_GPS_NOW_lat = 57.723255; //fly to N
     SYS_GPS_NOW_long =  39.735084;
   }
   else if (SYS_GPS_MOCK_counter > 64 && SYS_GPS_MOCK_counter < 128) {
-    Serial.println(F("fly to W"));
+    Serial.println(F("GPS MOCK W"));
     SYS_GPS_NOW_lat = 57.720069;
     SYS_GPS_NOW_long =  39.734000; //fly to W
   }
   else if (SYS_GPS_MOCK_counter > 128 && SYS_GPS_MOCK_counter < 192) {
-    Serial.println(F("fly to S"));
+    Serial.println(F("GPS MOCK S"));
     SYS_GPS_NOW_lat = 57.719726;  //to S
     SYS_GPS_NOW_long =  39.734472;
   }
   else {
-    Serial.println(F("fly to E"));
+    Serial.println(F("GPS MOCK E"));
     SYS_GPS_NOW_lat = 57.720548;//to E
     SYS_GPS_NOW_long =  39.744558;
   }
-  Serial.println(SYS_GPS_MOCK_counter, DEC);
   Serial.print(F("SYS_GPS_HOME_dist =")); Serial.println(SYS_GPS_HOME_dist, DEC);
   Serial.print(F("SYS_GPS_HOME_azimuth =")); Serial.println(SYS_GPS_HOME_azimuth, DEC);
   Serial.print(F("SYS_GPS_NOW_course_over_ground =")); Serial.println(SYS_GPS_NOW_course_over_ground, DEC);
+  Serial.println();
 }
 #endif
