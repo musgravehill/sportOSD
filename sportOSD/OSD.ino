@@ -29,11 +29,12 @@ void OSD_PARAMS() {
 
 void OSD_GPS() {
   // ARROW to home
+  
+
   byte home_arrow_pos = (GPS_HOME_arrow_degree - 11) / 22;
   home_arrow_pos = (home_arrow_pos < 0 || home_arrow_pos > 15) ? 0 : home_arrow_pos;
   memset(screenBuffer, 0, sizeof(screenBuffer));
   screenBuffer[0] = ARROW_SYMBOLS[home_arrow_pos];
-   Serial.println(home_arrow_pos, DEC);
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
 
 }
