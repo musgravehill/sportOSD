@@ -25,11 +25,12 @@ void OSD_PARAMS() {
 }
 
 void OSD_GPS() {
+  byte pos_tmp;
   // ARROW to home
-  byte home_arrow_pos = (GPS_HOME_arrow_degree - 11) / 22;
-  home_arrow_pos = (home_arrow_pos < 0 || home_arrow_pos > 15) ? 0 : home_arrow_pos;
+  pos_tmp = (GPS_HOME_arrow_degree - 11) / 22;
+  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
   memset(screenBuffer, 0, sizeof(screenBuffer));
-  screenBuffer[0] = ARROW_SYMBOLS[home_arrow_pos];
+  screenBuffer[0] = ARROW_SYMBOLS[pos_tmp];
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
   //dist to home
   ItoaUnPadded(SYS_GPS_HOME_dist, screenBuffer , 5, 5);
@@ -44,6 +45,21 @@ void OSD_GPS() {
   screenBuffer[0] = 0x76;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_CURSOR));
 
+  pos_tmp = (SYS_GPS_NOW_cog - 11) / 22; //16 positions, 360\16 = 22 degree for each position
+  pos_tmp = (pos_tmp < 0 || pos_tmp > 15) ? 0 : pos_tmp;
+  byte arr_LR;
+  for (byte i = -4; i <= 4; i++) {
+    arr_LR = pos_tmp + i;
+    if (arr_LR < 0) {
+      arr_LR = 16 + arr_LR;
+    }
+    else if (arr_LR > 15) {
+      arr_LR = arr_LR - 16;
+    }
+    screenBuffer[(i + 4)] = HEADING_SYMBOLS[arr_LR];
+  }
+  MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HEADING_COMPASS));
+  
   /*
     OSD_POS_HEADING_BLOCK
     SYM_HEADING_N
@@ -60,19 +76,6 @@ void OSD_homeFixed() {
     MAX7456_WriteString("GPS HOME WAIT...", getPosition(OSD_POS_ALERT_GPS_NOT));
   }
 }
-
-/*
-  int16_t SYS_GPS_HOME_dist = 0; //in metr
-  int16_t SYS_GPS_HOME_azimuth = 0; //0..360 degree ARROW TO HOME
-  int16_t SYS_GPS_NOW_cog = 0; //0..360 degree 0=North
-  int16_t SYS_GPS_NOW_speed = 0;
-  int16_t SYS_GPS_NOW_altitude = 0;
-
-*/
-
-
-
-
 
 //=============================HELPERS====================================================================================
 uint16_t getPosition(uint16_t pos) {
