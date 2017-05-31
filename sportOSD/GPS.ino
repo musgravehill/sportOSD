@@ -80,8 +80,14 @@ void GPS_mock() {
     SYS_GPS_HOME_dist =45
     SYS_GPS_HOME_azimuth =3
     SYS_GPS_NOW_cog =0
-
   */
+  SYS_ACC_V = 10.567888;
+  SYS_RSSI = 120;
+  SYS_GPS_NOW_speed = 18;
+  SYS_GPS_HOME_dist = 9999;
+  SYS_GPS_NOW_altitude = 1200;
+
+  
   SYS_GPS_HOME_lat = 57.720138;
   SYS_GPS_HOME_long = 39.734516;
   SYS_GPS_isHomeFixed = true;  

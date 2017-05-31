@@ -3,25 +3,19 @@ void OSD_render() {
   OSD_homeFixed();
   OSD_PARAMS();
   OSD_GPS();
-
   MAX7456_DrawScreen();
 }
 
 void OSD_PARAMS() {
   //acc volt
-  SYS_ACC_V = 10.567888;
   ItoaUnPadded(SYS_ACC_V * 100, screenBuffer, 5, 3); // 12.59
   screenBuffer[5] = SYM_VOLT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ACC_V));
-
   //RSSI
-  SYS_RSSI = 120;
   ItoaUnPadded(SYS_RSSI, screenBuffer , 4, 4);
   screenBuffer[3] = SYM_RSSI;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_RSSI));
-
   //SPEED
-  SYS_GPS_NOW_speed = 18;
   ItoaUnPadded(SYS_GPS_NOW_speed, screenBuffer , 3, 3);
   screenBuffer[2] = SYM_MS;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_SPEED));
@@ -34,15 +28,11 @@ void OSD_GPS() {
   memset(screenBuffer, 0, sizeof(screenBuffer));
   screenBuffer[0] = ARROW_SYMBOLS[home_arrow_pos];
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_AZIMUTH));
-
   //dist to home
-  SYS_GPS_HOME_dist = 9999;
   ItoaUnPadded(SYS_GPS_HOME_dist, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_M;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_DIST));
-
-
-  SYS_GPS_NOW_altitude = 9999;
+  //alt
   ItoaUnPadded(SYS_GPS_NOW_altitude, screenBuffer , 5, 5);
   screenBuffer[4] = SYM_ALT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ALT));
