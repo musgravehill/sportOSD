@@ -14,6 +14,7 @@ void TIMEMACHINE_loop() {
 
 
 void TIMEMACHINE_333ms() {  
+  OSD_render(); 
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
 #endif

@@ -9,7 +9,7 @@
 #include "incl.h"
 
 FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
-FrSkySportDecoder decoder(true);; // Create decoder object WITH POLLING
+FrSkySportDecoder decoder; // Create decoder object WITH POLLING
 
 
 float SYS_GPS_HOME_lat = 0.0f; //HOME TODO
@@ -55,7 +55,7 @@ void setup() {
 void loop() {
   SPORT_getData();
   TIMEMACHINE_loop();
-  OSD_render();
+  //OSD_render();
 }
 
 
