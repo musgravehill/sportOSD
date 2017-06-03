@@ -28,7 +28,6 @@
 #include "FrSkySportTelemetry/FrSkySportSensorFcs.cpp"
 
 FrSkySportSensorFcs sensor_fcs_main;
-FrSkySportSensorFcs sensor_fcs_video(FrSkySportSensor::ID15);
 FrSkySportSensorGps sensor_gps;
 
 FrSkySportTelemetry frsky_telemetry;
@@ -42,12 +41,15 @@ int16_t gps_speed; // m/s
 float    gps_course; // 90.23 Course over ground in degrees (0-359, 0 = north)
 int16_t gps_y, gps_m, gps_d; //17, 4, 29,  Date (year - 2000, month, day)
 int16_t gps_h, gps_i, gps_s; // 12,59, 59);   // Time (hour, minute, second) - will be affected by timezone setings in your radio
+byte gps_sat_count = 0;
 
 //TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_333ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_111ms = 0L;
+
+#define GPS_SAT_MIN_COUNT 2
 
 void setup() {
-  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12, &sensor_fcs_main, &sensor_fcs_video, &sensor_gps);
+  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12, &sensor_fcs_main, &sensor_gps);
   Serial.begin(57600);
   Serial.flush();
   delay(3000); //5s
