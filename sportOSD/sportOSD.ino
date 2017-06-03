@@ -15,6 +15,7 @@ FrSkySportDecoder decoder; // Create decoder object without polling
 
 float SYS_GPS_HOME_lat = 0.0f; //HOME TODO
 float SYS_GPS_HOME_long = 0.0f; //HOME TODO
+int16_t SYS_GPS_HOME_altitude = 0.0f; //HOME TODO
 
 float SYS_GPS_NOW_lat = 0.0f;
 float SYS_GPS_NOW_long = 0.0f;
@@ -22,7 +23,7 @@ int16_t SYS_GPS_HOME_dist = 0; //in metr
 int16_t SYS_GPS_HOME_azimuth = 0; //0..360 degree ARROW TO HOME
 int16_t SYS_GPS_NOW_cog = 0; //0..360 degree 0=North
 int16_t SYS_GPS_NOW_speed = 0;
-int16_t SYS_GPS_NOW_altitude = 0;
+int16_t SYS_GPS_NOW_altitude = 0; //may be minus negative
 byte SYS_RSSI = 0;
 float SYS_MAIN_V = 0.0f;
 float SYS_VID_V = 0.0f;

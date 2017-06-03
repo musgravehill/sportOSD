@@ -1,11 +1,12 @@
 
-//get gps 500 times. If 500 times is NOTNULL, then save home position && set SYS_GPS_isHomeFixed = true
+//get gps_home first N times.
 void GPS_home_position_fix() {
   if (!SYS_GPS_isHomeFixed && SYS_GPS_NOW_lat > 0 && SYS_GPS_NOW_long > 0) {
     SYS_GPS_countPositionSuccess++;
-    if (SYS_GPS_countPositionSuccess > 500) {
-      SYS_GPS_HOME_lat =  SYS_GPS_NOW_lat;
-      SYS_GPS_HOME_long = SYS_GPS_NOW_long;
+    SYS_GPS_HOME_lat = SYS_GPS_HOME_lat * 0.8f +  SYS_GPS_NOW_lat * 0.2f;
+    SYS_GPS_HOME_long = SYS_GPS_HOME_long * 0.8f + SYS_GPS_NOW_long * 0.2f;
+    SYS_GPS_HOME_altitude = SYS_GPS_HOME_altitude * 0.8f + SYS_GPS_NOW_altitude * 0.2f;
+    if (SYS_GPS_countPositionSuccess > 255) {
       SYS_GPS_isHomeFixed = true;
     }
   }
@@ -24,7 +25,7 @@ void GPS_update_home_distance_and_home_azimuth() {
   // Courtesy of Maarten Lamers
   double SYS_GPS_HOME_lat_rad = radians(SYS_GPS_HOME_lat);
   double SYS_GPS_NOW_lat_rad = radians(SYS_GPS_NOW_lat);
-  
+
   double delta = radians(SYS_GPS_HOME_long - SYS_GPS_NOW_long);
   double sdlong = sin(delta);
   double cdlong = cos(delta);

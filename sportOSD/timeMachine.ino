@@ -32,23 +32,24 @@ void  TIMEMACHINE_1000ms() {
 #endif
 }
 
-
+#ifdef DEBUG
 void SYS_debug() {
   Serial.println();
   Serial.println();
-  Serial.println("----------------SYS-------------------");
-  Serial.print("SYS_GPS_HOME_lat ="); Serial.println(SYS_GPS_HOME_lat, DEC);
-  Serial.print("SYS_GPS_HOME_long ="); Serial.println(SYS_GPS_HOME_long, DEC);
-  Serial.print("SYS_GPS_NOW_lat ="); Serial.println(SYS_GPS_NOW_lat, DEC);
-  Serial.print("SYS_GPS_NOW_long ="); Serial.println(SYS_GPS_NOW_long, DEC);
-  Serial.print("SYS_GPS_HOME_dist ="); Serial.println(SYS_GPS_HOME_dist, DEC);
-  Serial.print("SYS_GPS_HOME_azimuth ="); Serial.println(SYS_GPS_HOME_azimuth, DEC);
-  Serial.print("SYS_GPS_NOW_cog ="); Serial.println(SYS_GPS_NOW_cog, DEC);
-  Serial.print("SYS_GPS_NOW_speed ="); Serial.println(SYS_GPS_NOW_speed, DEC);
-  Serial.print("SYS_GPS_NOW_altitude ="); Serial.println(SYS_GPS_NOW_altitude, DEC);
-  Serial.print("SYS_RSSI ="); Serial.println(SYS_RSSI, DEC);
-  Serial.print("SYS_MAIN_V ="); Serial.println(SYS_MAIN_V, DEC);
+  Serial.println(F("----------------SYS-------------------"));
+  Serial.print(F("SYS_GPS_HOME_lat =")); Serial.println(SYS_GPS_HOME_lat, DEC);
+  Serial.print(F("SYS_GPS_HOME_long =")); Serial.println(SYS_GPS_HOME_long, DEC);
+  Serial.print(F("SYS_GPS_NOW_lat =")); Serial.println(SYS_GPS_NOW_lat, DEC);
+  Serial.print(F("SYS_GPS_NOW_long =")); Serial.println(SYS_GPS_NOW_long, DEC);
+  Serial.print(F("SYS_GPS_HOME_dist =")); Serial.println(SYS_GPS_HOME_dist, DEC);
+  Serial.print(F("SYS_GPS_HOME_azimuth =")); Serial.println(SYS_GPS_HOME_azimuth, DEC);
+  Serial.print(F("SYS_GPS_NOW_cog =")); Serial.println(SYS_GPS_NOW_cog, DEC);
+  Serial.print(F("SYS_GPS_NOW_speed =")); Serial.println(SYS_GPS_NOW_speed, DEC);
+  Serial.print(F("SYS_GPS_NOW_altitude =")); Serial.println(SYS_GPS_NOW_altitude, DEC);
+  Serial.print(F("SYS_RSSI =")); Serial.println(SYS_RSSI, DEC);
+  Serial.print(F("SYS_MAIN_V =")); Serial.println(SYS_MAIN_V, DEC);
   Serial.println();
   Serial.println();
 }
+#endif
 
