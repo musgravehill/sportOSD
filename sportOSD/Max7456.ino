@@ -150,42 +150,31 @@ void MAX7456Setup(void)
 {
   uint8_t MAX7456_reset = 0x0C;
   uint8_t MAX_screen_rows;
-
   MAX7456DISABLE
-
   MAX7456HWRESET
-
   // SPCR = 01010000
   //interrupt disabled,spi enabled,msb 1st,master,clk low when idle,
   //sample on leading edge of clk,system clock/4 rate (4 meg)
   //SPI2X will double the rate (8 meg)
-
   SPCR = (1 << SPE) | (1 << MSTR);
   SPSR = (1 << SPI2X);
   uint8_t spi_junk;
   spi_junk = SPSR;
   spi_junk = SPDR;
   delay(10);
-
 #ifdef MAX_SOFTRESET
   MAX7456SoftReset();
 #endif
-
   MAX7456ENABLE
-
   // PAL
   MAX7456_reset = 0x4C;
   MAX_screen_size = 480;
   MAX_screen_rows = 16;
-
-
   // Set up the Max chip. Enable display + set standard.
   MAX7456_Send(MAX7456ADD_VM0, MAX7456_reset);
-
 #ifdef FASTPIXEL // force fast pixel timing helps with ghosting for some cams
   MAX7456_Send(MAX7456ADD_OSDM, 0x00);
 #endif
-
 #ifdef BWBRIGHTNESS // change charactor black/white level brightess from default 
   uint8_t x;
   for (x = 0; x < MAX_screen_rows; x++) {
@@ -193,33 +182,35 @@ void MAX7456Setup(void)
   }
 #endif
   MAX7456DISABLE
-
 # ifdef USE_VSYNC
-  volatile unsigned char vsync_wait = 0;
-
   /*ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-    EIMSK |= (1 << INT0);  // enable interuppt
+    EIMSK |= (1 << INT0);  // enable interuppt   //d3 pal-sportIN bad?
     EICRA |= (1 << ISC01); // interrupt at the falling edge
     }*/
   attachInterrupt(0, MAX7456_vsync_interrupt_func, FALLING);
-  void MAX7456_vsync_interrupt_func() {
-    vsync_wait = 0;
-  }
-  //ISR(INT0_vect) {
-  //vsync_wait = 0;
-  //}
-  void MAX7456_WaitVSYNC(void)  {
-    uint32_t vsync_timer = 40 + millis();
-    vsync_wait = 1;
-    while (vsync_wait) {
-      if (millis() > vsync_timer) {
-        vsync_wait = 0;
-      }
-    }
-  }
 #endif
 
 }
+
+# ifdef USE_VSYNC
+volatile bool vsync_wait = false; //unsigned char
+
+void MAX7456_vsync_interrupt_func() {
+  vsync_wait = false;
+}
+//ISR(INT0_vect) {
+//vsync_wait = 0;
+//}
+void MAX7456_WaitVSYNC(void)  {
+  uint32_t vsync_timer = 40 + millis();
+  vsync_wait = true;
+  while (vsync_wait) {
+    if (millis() > vsync_timer) {
+      vsync_wait = false;
+    }
+  }
+}
+#endif
 
 // Copy string from ram into screen buffer
 
@@ -243,30 +234,22 @@ void MAX7456_WriteString_P(const char *string, int Adresse)
 
 
 
-void MAX7456_DrawScreen()
-{
+void MAX7456_DrawScreen() {
   uint16_t xx;
-
   MAX7456ENABLE;
-
   MAX7456_Send(MAX7456ADD_DMAH, 0);
   MAX7456_Send(MAX7456ADD_DMAL, 0);
   MAX7456_Send(MAX7456ADD_DMM, 1);
-
 #ifdef USE_VSYNC
   MAX7456_WaitVSYNC();
 #endif
-
   for (xx = 0; xx < MAX_screen_size; ++xx) {
-
     //#ifdef USE_VSYNC
     // We don't actually need this?
     //if (xx == 240)
     //MAX7456_WaitVSYNC(); // Don't need this?
     //#endif
-
     MAX7456_Send(MAX7456ADD_DMDI, screen[xx]);
-
     //#ifdef CANVAS_SUPPORT
     //if (!canvasMode) // Don't erase in canvas mode
     //#endif
@@ -274,11 +257,8 @@ void MAX7456_DrawScreen()
     screen[xx] = ' ';
     //}
   }
-
-
   MAX7456_Send(MAX7456ADD_DMDI, END_string);
   MAX7456_Send(MAX7456ADD_DMM, 0);
-
   MAX7456DISABLE;
 }
 

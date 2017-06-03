@@ -45,17 +45,16 @@ void setup() {
   Serial.begin(9600);
 #endif
   delay(100);
+  SPORT_init();
+  delay(100);
   MAX7456SETHARDWAREPORTS
   delay(100);
   MAX7456Setup();
-  delay(100);
-  SPORT_init();
 }
 
 void loop() {
   SPORT_getData();
-  TIMEMACHINE_loop();
-  OSD_render();
+  TIMEMACHINE_loop();  
 }
 
 

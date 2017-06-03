@@ -13,7 +13,8 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_333ms() {    
+void TIMEMACHINE_333ms() {
+  OSD_render();
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
 #endif
@@ -21,21 +22,17 @@ void TIMEMACHINE_333ms() {
 
 void  TIMEMACHINE_1000ms() {
   //GPS_update_home_distance_and_home_azimuth();
-  //GPS_HOME_arrow_degree_calc();  
+  //GPS_HOME_arrow_degree_calc();
 #ifdef GPS_MOCK
   GPS_mock();
 #endif
 #ifdef DEBUG
-  SPORT_debug();
-  //SYS_debug();
+  SYS_debug();
 #endif
 }
 
 #ifdef DEBUG
 void SYS_debug() {
-  Serial.println();
-  Serial.println();
-  Serial.println(F("----------------SYS-------------------"));
   Serial.print(F("SYS_GPS_HOME_lat =")); Serial.println(SYS_GPS_HOME_lat, DEC);
   Serial.print(F("SYS_GPS_HOME_long =")); Serial.println(SYS_GPS_HOME_long, DEC);
   Serial.print(F("SYS_GPS_NOW_lat =")); Serial.println(SYS_GPS_NOW_lat, DEC);
