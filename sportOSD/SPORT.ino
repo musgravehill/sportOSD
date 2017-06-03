@@ -34,21 +34,21 @@ void SPORT_debug() {
   // Display data once a second to not interfeere with data decoding
   // Get basic XJT data (RSSI/ADC1/ADC2/RxBatt/SWR data)
   Serial.print("RSSI = "); Serial.print(xjt.getRssi()); // RSSI
-  Serial.print("; ADC1 = "); Serial.print(xjt.getAdc1());      // ADC1 voltage in volts
-  Serial.print("V; ADC2 = "); Serial.print(xjt.getAdc2());     // ADC2 voltage in volts
-  Serial.print("V; RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
-  Serial.print("V; SWR = "); Serial.println(xjt.getSwr());     // SWR
+  //Serial.print("; ADC1 = "); Serial.print(xjt.getAdc1());      // ADC1 voltage in volts
+ //Serial.print("V; ADC2 = "); Serial.print(xjt.getAdc2());     // ADC2 voltage in volts
+  //Serial.print("V; RxBatt = "); Serial.print(xjt.getRxBatt()); // RxBatt voltage in volts
+  //Serial.print("V; SWR = "); Serial.println(xjt.getSwr());     // SWR
   //FAS sensor
-  Serial.print("ACC_V = "); Serial.println(xjt.getVoltage()); //FAS sensor
+  //Serial.print("ACC_V = "); Serial.println(xjt.getVoltage()); //FAS sensor
   // Get GPS data
-  Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6);
-  Serial.print("; lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)
-  Serial.print("; altitude = "); Serial.print(xjt.getAltitude()); // Altitude in m (can be negative)
-  Serial.print("m; speed = "); Serial.print(xjt.getSpeed()); // Speed in m/s
-  Serial.print("m/s; COG = "); Serial.print(xjt.getCog());   // Course over ground in degrees (0-359, 0 = north)
-  char dateTimeStr[18];
-  sprintf(dateTimeStr, "%02u-%02u-%04u %02u:%02u:%02u", xjt.getDay(), xjt.getMonth(), xjt.getYear() + 2000, xjt.getHour(), xjt.getMinute(), xjt.getSecond());
-  Serial.print("; date/time = "); Serial.println(dateTimeStr); // Date (year - need to add 2000, month, day) and time (hour, minute, second)
+  //Serial.print("GPS: lat = "); Serial.print(xjt.getLat(), 6);
+  //Serial.print("; lon = "); Serial.print(xjt.getLon(), 6); // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)
+  //Serial.print("; altitude = "); Serial.print(xjt.getAltitude()); // Altitude in m (can be negative)
+  //Serial.print("m; speed = "); Serial.print(xjt.getSpeed()); // Speed in m/s
+  //Serial.print("m/s; COG = "); Serial.print(xjt.getCog());   // Course over ground in degrees (0-359, 0 = north)
+  //char dateTimeStr[18];
+  //sprintf(dateTimeStr, "%02u-%02u-%04u %02u:%02u:%02u", xjt.getDay(), xjt.getMonth(), xjt.getYear() + 2000, xjt.getHour(), xjt.getMinute(), xjt.getSecond());
+  //Serial.print("; date/time = "); Serial.println(dateTimeStr); // Date (year - need to add 2000, month, day) and time (hour, minute, second)
   Serial.println("");
 }
 #endif

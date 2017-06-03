@@ -38,24 +38,24 @@ uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
 
 void setup() {
-  SPORT_init();
-  delay(100);
-  MAX7456SETHARDWAREPORTS
-  delay(100);
-  MAX7456Setup();
-  delay(100);
 #ifdef DEBUG
   Serial.begin(9600);
 #endif
 #ifdef GPS_MOCK
   Serial.begin(9600);
 #endif
+  delay(100);
+  MAX7456SETHARDWAREPORTS
+  delay(100);
+  MAX7456Setup();
+  delay(100);
+  SPORT_init();
 }
 
 void loop() {
   SPORT_getData();
   TIMEMACHINE_loop();
-  //OSD_render();
+  OSD_render();
 }
 
 

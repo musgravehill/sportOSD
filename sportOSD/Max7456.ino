@@ -136,8 +136,8 @@ void MAX7456SoftReset(void)
 
   if ((rval & 7) == 0) {
     // Should alert...
-    // Serial.println("\r\nFailed to synchronize with MAX");
-    delay(1000);
+    Serial.println("\r\nFailed to synchronize with MAX");
+    delay(100);
   }
 
   // Issue software reset
@@ -195,9 +195,27 @@ void MAX7456Setup(void)
   MAX7456DISABLE
 
 # ifdef USE_VSYNC
-  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+  volatile unsigned char vsync_wait = 0;
+
+  /*ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     EIMSK |= (1 << INT0);  // enable interuppt
     EICRA |= (1 << ISC01); // interrupt at the falling edge
+    }*/
+  attachInterrupt(0, MAX7456_vsync_interrupt_func, FALLING);
+  void MAX7456_vsync_interrupt_func() {
+    vsync_wait = 0;
+  }
+  //ISR(INT0_vect) {
+  //vsync_wait = 0;
+  //}
+  void MAX7456_WaitVSYNC(void)  {
+    uint32_t vsync_timer = 40 + millis();
+    vsync_wait = 1;
+    while (vsync_wait) {
+      if (millis() > vsync_timer) {
+        vsync_wait = 0;
+      }
+    }
   }
 #endif
 
@@ -223,26 +241,7 @@ void MAX7456_WriteString_P(const char *string, int Adresse)
     * screenp++ = c;
 }
 
-#ifdef USE_VSYNC
-volatile unsigned char vsync_wait = 0;
 
-ISR(INT0_vect) {
-  vsync_wait = 0;
-}
-
-void MAX7456_WaitVSYNC(void)
-{
-  uint32_t vsync_timer = 40 + millis();
-
-  vsync_wait = 1;
-
-  while (vsync_wait) {
-    if (millis() > vsync_timer) {
-      vsync_wait = 0;
-    }
-  }
-}
-#endif
 
 void MAX7456_DrawScreen()
 {

@@ -13,22 +13,21 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_333ms() {  
-  OSD_render(); 
+void TIMEMACHINE_333ms() {    
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
 #endif
 }
 
 void  TIMEMACHINE_1000ms() {
-  GPS_update_home_distance_and_home_azimuth();
-  GPS_HOME_arrow_degree_calc();
+  //GPS_update_home_distance_and_home_azimuth();
+  //GPS_HOME_arrow_degree_calc();  
 #ifdef GPS_MOCK
   GPS_mock();
 #endif
 #ifdef DEBUG
   SPORT_debug();
-  SYS_debug();
+  //SYS_debug();
 #endif
 }
 
