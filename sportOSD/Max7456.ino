@@ -205,7 +205,7 @@ void MAX7456_WaitVSYNC(void)  {
   uint32_t vsync_timer = 40 + millis();
   vsync_wait = true;
   while (vsync_wait) {
-    if (millis() > vsync_timer) {
+    if (vsync_timer < millis()) {
       vsync_wait = false;
     }
   }
