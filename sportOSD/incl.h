@@ -7,15 +7,17 @@
 #include "FrSkySportTelemetry/FrSkySportSensorFcs.h"
 #include "FrSkySportTelemetry/FrSkySportSingleWireSerial.h"
 #include "FrSkySportTelemetry/FrSkySportDecoder.h"
+#include "FrSkySportTelemetry/FrSkySportPolling.h"
 
 #include "FrSkySportTelemetry/FrSkySportSensor.cpp"
 #include "FrSkySportTelemetry/FrSkySportSensorXjt.cpp"
 #include "FrSkySportTelemetry/FrSkySportSensorFcs.cpp"
 #include "FrSkySportTelemetry/FrSkySportSingleWireSerial.cpp"
 #include "FrSkySportTelemetry/FrSkySportDecoder.cpp"
+#include "FrSkySportTelemetry/FrSkySportPolling.cpp"
 #include <SoftwareSerial.h>
 
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h>
 //#undef PROGMEM
 //#define PROGMEM __attribute__(( section(".progmem.data") ))
 //#include <EEPROM.h>

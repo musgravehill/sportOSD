@@ -1,8 +1,8 @@
 
-//#define DEBUG true
+#define DEBUG true
 //#define GPS_MOCK true
 
-#define PIN_SPORT_IN  FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_3 //where PAL jumper
+ 
 
 #ifdef GPS_MOCK
 byte SYS_GPS_MOCK_counter = 0;

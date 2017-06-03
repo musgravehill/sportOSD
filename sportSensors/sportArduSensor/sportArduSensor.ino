@@ -46,22 +46,21 @@ byte gps_sat_count = 0;
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_111ms = 0L;
 
-#define GPS_SAT_MIN_COUNT 2
+#define GPS_SAT_MIN_COUNT 1
 
 void setup() {
   frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12, &sensor_fcs_main, &sensor_gps);
   Serial.begin(57600);
-  Serial.flush();
   delay(3000); //5s
-  Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz
+  Serial.flush();
+  //Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz
   Serial.flush();
 }
 
 void loop() {
-  while (Serial.available() > 0) {
-    GPS_process();
-  }
-  TIMEMACHINE_loop();
+  GPS_process();
+  SPORT_telemetry_send();
+  //TIMEMACHINE_loop();
 }
 
 

@@ -13,8 +13,7 @@ void TIMEMACHINE_loop() {
 }
 
 
-void TIMEMACHINE_333ms() {
-  SPORT_getData();
+void TIMEMACHINE_333ms() {  
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
 #endif

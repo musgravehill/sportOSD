@@ -8,9 +8,8 @@
 
 #include "incl.h"
 
-FrSkySportSensorFcs sensor_fcs_video(FrSkySportSensor::ID15);
 FrSkySportSensorXjt xjt; // Create XJT sensor with default ID
-FrSkySportDecoder decoder; // Create decoder object without polling
+FrSkySportDecoder decoder(true);; // Create decoder object WITH POLLING
 
 
 float SYS_GPS_HOME_lat = 0.0f; //HOME TODO
@@ -39,10 +38,12 @@ uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
 
 
 void setup() {
-  MAX7456SETHARDWAREPORTS
-  delay(1000);
-  MAX7456Setup();
   SPORT_init();
+  delay(100);
+  MAX7456SETHARDWAREPORTS
+  delay(100);
+  MAX7456Setup();
+  delay(100);
 #ifdef DEBUG
   Serial.begin(9600);
 #endif
@@ -52,6 +53,7 @@ void setup() {
 }
 
 void loop() {
+  SPORT_getData();
   TIMEMACHINE_loop();
   OSD_render();
 }

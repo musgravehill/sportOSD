@@ -9,5 +9,5 @@ void TIMEMACHINE_loop() {
 
 
 void TIMEMACHINE_111ms() {
-  SPORT_telemetry_send();
+  
 }
