@@ -146,8 +146,7 @@ void MAX7456SoftReset(void)
 }
 #endif
 
-void MAX7456Setup(void)
-{
+void MAX7456Setup(void) {
   uint8_t MAX7456_reset = 0x0C;
   uint8_t MAX_screen_rows;
   MAX7456DISABLE
@@ -189,12 +188,10 @@ void MAX7456Setup(void)
     }*/
   attachInterrupt(0, MAX7456_vsync_interrupt_func, FALLING);
 #endif
-
 }
 
 # ifdef USE_VSYNC
 volatile bool vsync_wait = false; //unsigned char
-
 void MAX7456_vsync_interrupt_func() {
   vsync_wait = false;
 }
@@ -205,6 +202,7 @@ void MAX7456_WaitVSYNC(void)  {
   uint32_t vsync_timer = 40 + millis();
   vsync_wait = true;
   while (vsync_wait) {
+    TIMEMACHINE_every_loop(); //function on every loop cycle!
     if (vsync_timer < millis()) {
       vsync_wait = false;
     }
@@ -212,9 +210,8 @@ void MAX7456_WaitVSYNC(void)  {
 }
 #endif
 
+
 // Copy string from ram into screen buffer
-
-
 void MAX7456_WriteString(const char *string, int addr)
 {
   char *screenp = &screen[addr];

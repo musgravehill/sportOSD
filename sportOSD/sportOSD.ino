@@ -33,8 +33,9 @@ bool SYS_GPS_isHomeFixed = false; //when home position fixed and stored
 
 
 //TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_333ms = 0L;
-uint32_t TIMEMACHINE_prevMicros_1000ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_211ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_373ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_2203ms = 0L;
 
 
 void setup() {
@@ -52,9 +53,9 @@ void setup() {
   MAX7456Setup();
 }
 
-void loop() {
-  SPORT_getData();
-  TIMEMACHINE_loop();  
+void loop() {  
+  TIMEMACHINE_process();
+  TIMEMACHINE_every_loop();
 }
 
 

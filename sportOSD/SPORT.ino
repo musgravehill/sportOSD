@@ -4,8 +4,6 @@ void SPORT_init() {
 }
 
 void SPORT_getData() {
-  decoder.decode(); //DECODE!!!!!!
-  
   SYS_GPS_NOW_lat = xjt.getLat();
   SYS_GPS_NOW_long = xjt.getLon();
   SYS_GPS_NOW_cog = xjt.getCog(); //0..360 degree 0=North

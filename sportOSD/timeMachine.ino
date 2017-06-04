@@ -1,28 +1,41 @@
-void TIMEMACHINE_loop() {
+void TIMEMACHINE_every_loop() {
+  decoder.decode(); //DECODE ON EVERY LOOP
+}
+
+void TIMEMACHINE_process() {
   uint32_t  TIMEMACHINE_currMillis = millis();
 
-  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_333ms) > 333L) {
-    TIMEMACHINE_333ms();
-    TIMEMACHINE_prevMicros_333ms = TIMEMACHINE_currMillis;
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_211ms) > 211L) {
+    TIMEMACHINE_211ms();
+    TIMEMACHINE_prevMicros_211ms = TIMEMACHINE_currMillis;
   }
 
-  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_1000ms) > 1000L) {
-    TIMEMACHINE_1000ms();
-    TIMEMACHINE_prevMicros_1000ms = TIMEMACHINE_currMillis;
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_373ms) > 373L) {
+    TIMEMACHINE_373ms();
+    TIMEMACHINE_prevMicros_373ms = TIMEMACHINE_currMillis;
+  }
+
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_2203ms) > 2203L) {
+    TIMEMACHINE_2203ms();
+    TIMEMACHINE_prevMicros_2203ms = TIMEMACHINE_currMillis;
   }
 }
 
 
-void TIMEMACHINE_333ms() {
+void TIMEMACHINE_211ms() {
+  SPORT_getData();
+  GPS_update_home_distance_and_home_azimuth();
+  GPS_HOME_arrow_degree_calc();
+}
+
+void TIMEMACHINE_373ms() {
   OSD_render();
 #ifdef GPS_MOCK
   SYS_GPS_MOCK_counter++;
 #endif
 }
 
-void  TIMEMACHINE_1000ms() {
-  //GPS_update_home_distance_and_home_azimuth();
-  //GPS_HOME_arrow_degree_calc();
+void  TIMEMACHINE_2203ms() {
 #ifdef GPS_MOCK
   GPS_mock();
 #endif
