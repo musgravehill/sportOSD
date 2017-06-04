@@ -45,7 +45,7 @@ void OSD_GPS() {
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_HOME_DIST));
   //alt
   memset(screenBuffer, 0, sizeof(screenBuffer));
-  ItoaUnPadded(SYS_GPS_NOW_altitude, screenBuffer , 5, 5);
+  ItoaUnPadded((SYS_GPS_NOW_altitude- SYS_GPS_HOME_altitude), screenBuffer , 5, 5);
   screenBuffer[4] = SYM_ALT;
   MAX7456_WriteString(screenBuffer, getPosition(OSD_POS_ALT));
   //heading compass center cursor

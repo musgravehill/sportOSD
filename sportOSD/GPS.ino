@@ -3,10 +3,10 @@
 void GPS_home_position_fix() {
   if (!SYS_GPS_isHomeFixed && SYS_GPS_NOW_lat > 0 && SYS_GPS_NOW_long > 0) {
     SYS_GPS_countPositionSuccess++;
-    SYS_GPS_HOME_lat = SYS_GPS_HOME_lat * 0.8f +  SYS_GPS_NOW_lat * 0.2f;
-    SYS_GPS_HOME_long = SYS_GPS_HOME_long * 0.8f + SYS_GPS_NOW_long * 0.2f;
-    SYS_GPS_HOME_altitude = SYS_GPS_HOME_altitude * 0.8f + SYS_GPS_NOW_altitude * 0.2f;
-    if (SYS_GPS_countPositionSuccess > 64) {
+    SYS_GPS_HOME_lat = SYS_GPS_HOME_lat * 0.5f +  SYS_GPS_NOW_lat * 0.5f;
+    SYS_GPS_HOME_long = SYS_GPS_HOME_long * 0.5f + SYS_GPS_NOW_long * 0.5f;
+    SYS_GPS_HOME_altitude = SYS_GPS_HOME_altitude * 0.5f + SYS_GPS_NOW_altitude * 0.5f;
+    if (SYS_GPS_countPositionSuccess > 32) {
       SYS_GPS_isHomeFixed = true;
     }
   }

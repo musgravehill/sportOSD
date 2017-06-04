@@ -8,7 +8,7 @@ void SPORT_getData() {
   SYS_GPS_NOW_long = sport_gps.getLon();
   SYS_GPS_NOW_cog = sport_gps.getCog(); //0..360 degree 0=North
   SYS_GPS_NOW_speed = sport_gps.getSpeed();
-  SYS_GPS_NOW_altitude = sport_gps.getAltitude() - SYS_GPS_HOME_altitude; //alt relative to home_alt
+  SYS_GPS_NOW_altitude = sport_gps.getAltitude(); //alt relative to home_alt
   SYS_RSSI =  sport_xjt.getRssi();
   SYS_MAIN_V = sport_fcs.getVoltage(); //FAS sensor, volt
   SYS_VID_V = sport_fcs.getCurrent(); //FAS sensor, Amper=0
