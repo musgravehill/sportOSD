@@ -27,7 +27,7 @@
 #include "FrSkySportTelemetry/FrSkySportSensorGps.cpp"
 #include "FrSkySportTelemetry/FrSkySportSensorFcs.cpp"
 
-//FrSkySportSensorFcs sensor_fcs_main;
+FrSkySportSensorFcs sensor_fcs_main;
 FrSkySportSensorGps sensor_gps;
 
 FrSkySportTelemetry frsky_telemetry;
@@ -49,10 +49,10 @@ byte gps_sat_count = 0;
 
 void setup() {
   Serial.begin(57600);
-  delay(100);
-  Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz for MTK chipset!!!!!!
-  delay(100);
-  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12,  &sensor_gps);   //&sensor_fcs_main,
+  //delay(100);
+  //Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz for MTK chipset!!!!!!
+  //delay(100);
+  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12,  &sensor_gps, &sensor_fcs_main); 
   //Serial.flush();
 }
 
