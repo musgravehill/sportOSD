@@ -36,8 +36,8 @@ FrSkySportTelemetry frsky_telemetry;
 #include "TinyGPSplus/TinyGPS++.cpp"
 TinyGPSPlus gps_parser;
 
-float gps_lat = 57.444444;
-float gps_lng = 39.123456; 
+float gps_lat = 55.123456;
+float gps_lng = 33.123456; 
 int16_t gps_alt; //+- m
 int16_t gps_speed; // m/s
 float    gps_course; // 90.23 Course over ground in degrees (0-359, 0 = north)
@@ -51,6 +51,7 @@ void setup() {
   Serial.begin(57600);
   delay(100);
   Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz for MTK chipset!!!!!!
+  delay(100);
   frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12,  &sensor_gps);   //&sensor_fcs_main,
   //Serial.flush();
 }
