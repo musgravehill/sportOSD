@@ -27,15 +27,17 @@
 #include "FrSkySportTelemetry/FrSkySportSensorGps.cpp"
 #include "FrSkySportTelemetry/FrSkySportSensorFcs.cpp"
 
-FrSkySportSensorFcs sensor_fcs_main;
+//FrSkySportSensorFcs sensor_fcs_main;
 FrSkySportSensorGps sensor_gps;
 
 FrSkySportTelemetry frsky_telemetry;
 
-#include <TinyGPS++.h>
+#include "TinyGPSplus/TinyGPS++.h"
+#include "TinyGPSplus/TinyGPS++.cpp"
 TinyGPSPlus gps_parser;
 
-float gps_lat, gps_lng; //float -48.99999999
+float gps_lat = 57.444444;
+float gps_lng = 39.123456; 
 int16_t gps_alt; //+- m
 int16_t gps_speed; // m/s
 float    gps_course; // 90.23 Course over ground in degrees (0-359, 0 = north)
@@ -43,29 +45,20 @@ int16_t gps_y, gps_m, gps_d; //17, 4, 29,  Date (year - 2000, month, day)
 int16_t gps_h, gps_i, gps_s; // 12,59, 59);   // Time (hour, minute, second) - will be affected by timezone setings in your radio
 byte gps_sat_count = 0;
 
-//TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_111ms = 0L;
-
 #define GPS_SAT_MIN_COUNT 1
 
 void setup() {
-  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12, &sensor_fcs_main, &sensor_gps);
   Serial.begin(57600);
-  delay(3000); //5s
-  Serial.flush();
-  //Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz
-  Serial.flush();
+  delay(100);
+  Serial.println(F("$PMTK300,1000,0,0,0,0*1C")); //1Hz for MTK chipset!!!!!!
+  frsky_telemetry.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_12,  &sensor_gps);   //&sensor_fcs_main,
+  //Serial.flush();
 }
 
 void loop() {
   GPS_process();
   SPORT_telemetry_send();
-  //TIMEMACHINE_loop();
 }
-
-
-
-
 
 
 

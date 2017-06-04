@@ -4,12 +4,16 @@
 
 #include "FrSkySportTelemetry/FrSkySportSensor.h"
 #include "FrSkySportTelemetry/FrSkySportSensorXjt.h"
+#include "FrSkySportTelemetry/FrSkySportSensorFcs.h"
+#include "FrSkySportTelemetry/FrSkySportSensorGps.h"
 #include "FrSkySportTelemetry/FrSkySportSingleWireSerial.h"
 #include "FrSkySportTelemetry/FrSkySportDecoder.h"
 #include "FrSkySportTelemetry/FrSkySportPolling.h"
 
 #include "FrSkySportTelemetry/FrSkySportSensor.cpp"
 #include "FrSkySportTelemetry/FrSkySportSensorXjt.cpp"
+#include "FrSkySportTelemetry/FrSkySportSensorFcs.cpp"
+#include "FrSkySportTelemetry/FrSkySportSensorGps.cpp"
 #include "FrSkySportTelemetry/FrSkySportSingleWireSerial.cpp"
 #include "FrSkySportTelemetry/FrSkySportDecoder.cpp"
 #include "FrSkySportTelemetry/FrSkySportPolling.cpp"

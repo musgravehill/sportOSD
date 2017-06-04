@@ -1,17 +1,17 @@
 
 void SPORT_init() {
-  decoder.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_3, &xjt);
+  sport_decoder.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_3, &sport_xjt, &sport_fcs, &sport_gps);
 }
 
 void SPORT_getData() {
-  SYS_GPS_NOW_lat = xjt.getLat();
-  SYS_GPS_NOW_long = xjt.getLon();
-  SYS_GPS_NOW_cog = xjt.getCog(); //0..360 degree 0=North
-  SYS_GPS_NOW_speed = xjt.getSpeed();
-  SYS_GPS_NOW_altitude = xjt.getAltitude() - SYS_GPS_HOME_altitude; //alt relative to home_alt
-  SYS_RSSI =  xjt.getRssi();
-  SYS_MAIN_V = xjt.getVoltage(); //FAS sensor, Amper=0
-  SYS_VID_V = xjt.getCurrent(); //FAS sensor, Amper=0
+  SYS_GPS_NOW_lat = sport_gps.getLat();
+  SYS_GPS_NOW_long = sport_gps.getLon();
+  SYS_GPS_NOW_cog = sport_gps.getCog(); //0..360 degree 0=North
+  SYS_GPS_NOW_speed = sport_gps.getSpeed();
+  SYS_GPS_NOW_altitude = sport_gps.getAltitude() - SYS_GPS_HOME_altitude; //alt relative to home_alt
+  SYS_RSSI =  sport_xjt.getRssi();
+  SYS_MAIN_V = sport_fcs.getVoltage(); //FAS sensor, volt
+  SYS_VID_V = sport_fcs.getCurrent(); //FAS sensor, Amper=0
 
   //normalize COG
   SYS_GPS_NOW_cog = (SYS_GPS_NOW_cog >= 360) ? 0 : SYS_GPS_NOW_cog;

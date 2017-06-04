@@ -1,5 +1,5 @@
 void TIMEMACHINE_every_loop() {
-  decoder.decode(); //DECODE ON EVERY LOOP
+  sport_decoder.decode(); //DECODE ON EVERY LOOP
 }
 
 void TIMEMACHINE_process() {

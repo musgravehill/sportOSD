@@ -1,5 +1,5 @@
 void SPORT_telemetry_send() {
-  sensor_fcs_main.setData(gps_sat_count, 12.58);  
+  //sensor_fcs_main.setData(gps_sat_count, 12.58);  
 
   //setData(float lat, float lon, float alt, float speed, float cog, uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
   sensor_gps.setData(gps_lat, gps_lng,   // Latitude and longitude in degrees decimal (positive for N/E, negative for S/W)

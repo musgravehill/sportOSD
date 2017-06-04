@@ -2,7 +2,11 @@ void GPS_process() {
   while (Serial.available() > 0) {
     if (gps_parser.encode(Serial.read())) {
 
-      //if (gps_parser.satellites.isValid() && gps_parser.satellites.value() >= GPS_SAT_MIN_COUNT) {
+      if (gps_parser.satellites.isValid()) {
+        gps_sat_count = gps_parser.satellites.value();
+      }
+
+      //if (gps_parser.satellites.isValid() && gps_sat_count >= GPS_SAT_MIN_COUNT) {
 
       if (gps_parser.location.isValid())  {
         gps_lat = gps_parser.location.lat();
