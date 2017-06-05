@@ -1,10 +1,9 @@
 
 // UPLOAD FONT TABLE by mwOSD 1.7
+//USE RESISTOR 4.7K FOR S.PORT
 
 //TODO
-// 0. avg-filter for alt, cog, home-azimuth, gps-lat\long
-// gps-lat\long avg-filter for HOME_POS init!!!!!
-// SYS_VID_V  add sensor
+// 0.
 
 #include "incl.h"
 
