@@ -37,7 +37,7 @@ float SYS_acc_video_v = 0.0f;
 
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_1ms = 0L;
-uint32_t TIMEMACHINE_prevMicros_331ms = 0L;
+uint32_t TIMEMACHINE_prevMicros_1103ms = 0L;
 
 void setup() {
   delay(100);
