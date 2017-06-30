@@ -1,8 +1,6 @@
 
-#define DEBUG true
-//#define GPS_MOCK true
-
- 
+//#define DEBUG true
+//#define GPS_MOCK true 
 
 #ifdef GPS_MOCK
 byte SYS_GPS_MOCK_counter = 0;

@@ -10,7 +10,9 @@
 //14 15 16 17 
 //A0 A1 A2 A3 
 
-//is A1 have CAPACITOR???
+// A1&A3 does not have capacitor!
+// A1 ---- 1k resistor --- atmega
+// A3 ---- 1k resistor --- atmega
 
 #include "incl.h"
 
