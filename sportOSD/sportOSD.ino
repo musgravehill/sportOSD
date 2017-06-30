@@ -2,8 +2,15 @@
 // UPLOAD FONT TABLE by mwOSD 1.7
 //USE RESISTOR 4.7K FOR S.PORT
 
-//TODO
-// 0.
+//MINIM OSD pinOUT
+//#define AMPERAGEPIN A1
+//#define RSSIPIN A3
+//So, I can use A1 for Soft_Serial S.port
+
+//14 15 16 17 
+//A0 A1 A2 A3 
+
+//is A1 have CAPACITOR???
 
 #include "incl.h"
 

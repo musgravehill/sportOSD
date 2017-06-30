@@ -24,8 +24,20 @@ class FrSkySportSingleWireSerial
 #elif defined(__MK66FX1M0__) || defined(__MK64FX512__) 
     enum SerialId { SERIAL_USB = 0, SERIAL_1 = 1, SERIAL_2 = 2, SERIAL_3 = 3, SERIAL_4 = 4 , SERIAL_5 = 5 , SERIAL_6 = 6 };
 #else
-    enum SerialId { SOFT_SERIAL_PIN_2 = 2, SOFT_SERIAL_PIN_3 = 3, SOFT_SERIAL_PIN_4 = 4, SOFT_SERIAL_PIN_5 = 5, SOFT_SERIAL_PIN_6 = 6, SOFT_SERIAL_PIN_7 = 7,
-                     SOFT_SERIAL_PIN_8 = 8, SOFT_SERIAL_PIN_9 = 9, SOFT_SERIAL_PIN_10 = 10, SOFT_SERIAL_PIN_11 = 11, SOFT_SERIAL_PIN_12 = 12 };
+    enum SerialId { 
+	SOFT_SERIAL_PIN_2 = 2, 
+	SOFT_SERIAL_PIN_3 = 3, 
+	SOFT_SERIAL_PIN_4 = 4, 
+	SOFT_SERIAL_PIN_5 = 5, 
+	SOFT_SERIAL_PIN_6 = 6, 
+	SOFT_SERIAL_PIN_7 = 7, 	
+	SOFT_SERIAL_PIN_8 = 8, 
+	SOFT_SERIAL_PIN_9 = 9, 
+	SOFT_SERIAL_PIN_10 = 10, 
+	SOFT_SERIAL_PIN_11 = 11, 
+	SOFT_SERIAL_PIN_12 = 12,
+	SOFT_SERIAL_A1 = 15
+	};
 #endif
     FrSkySportSingleWireSerial();
     void begin(SerialId id);

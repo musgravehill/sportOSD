@@ -1,6 +1,6 @@
 
 void SPORT_init() {
-  sport_decoder.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_PIN_3, &sport_xjt, &sport_fcs, &sport_gps);
+  sport_decoder.begin(FrSkySportSingleWireSerial::SOFT_SERIAL_A1, &sport_xjt, &sport_fcs, &sport_gps);
 }
 
 void SPORT_getData() {

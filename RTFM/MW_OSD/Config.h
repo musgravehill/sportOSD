@@ -4,8 +4,8 @@
 
 /********************       OSD HARDWARE settings      *********************/
 //Choose ONLY ONE option:
-#define MINIMOSD                  // Uncomment this if using standard MINIMOSD hardware (default)
-//#define MICROMINIMOSD             // Uncomment this if using the MICRO MINIMOSD hardware
+//#define MINIMOSD                  // Uncomment this if using standard MINIMOSD hardware (default)
+#define MICROMINIMOSD             // Uncomment this if using the MICRO MINIMOSD hardware
 //#define AEROMAX                   // Uncomment this if using MWOSD AEROMAX hardware
 //#define RTFQV1                    // Uncomment this if using standard RTFQ/Witespy V1.1 OSD, select this to correct for both swapped bat1/bat 2 and to also use alternative resistors / pinouts.  
 //#define RTFQMICRO                 // Uncomment this if using micro RTFQ/Witespy Micro Minim OSD, select this to correct for swapped bat1/bat 2.  
@@ -92,9 +92,9 @@
 /********************       FEATURES      *********************/
 // Disable features if you require memory for other features
 // Further configuration may be require elsewhere in config.h + option enabled on GUI
-#define SBDIRECTION     // Enable/disable sidebar indicators (changes in speed or altitude)
-#define HORIZON         // Enable/disable HORIZON indicator
-#define MAPMODE         // Enable/disable MAP MODE - map indication of relative positions of home and aircraft
+//#define SBDIRECTION     // Enable/disable sidebar indicators (changes in speed or altitude)
+//#define HORIZON         // Enable/disable HORIZON indicator
+//#define MAPMODE         // Enable/disable MAP MODE - map indication of relative positions of home and aircraft
 //#define GPSTIME       // Enable/disable GPS Time functions
 //#define SPORT         // Enable/disable FRSKY S.PORT cell code
 
@@ -110,10 +110,10 @@
 
 
 /********************       GPS OSD settings (GPS / NAZA)      *********************/
-#define GPSHOMEFIX 50               // Number of consecutive valid fixes before home will be set. 50@ 10hz = 5 seconds of valid fixes.
-#define HOMESATFIX 6                // Minimum number of sats required when setting initial home location. 
-#define GPSOSDARMDISTANCE 20        // distance from home in meters when GPSOSD arms. Starts flight timer etc.
-#define GPSOSDHOMEDISTANCE 40       // distance from home in meters when GPSOSD is home. When speed is low it disarms and displays summary screen.
+//#define GPSHOMEFIX 50               // Number of consecutive valid fixes before home will be set. 50@ 10hz = 5 seconds of valid fixes.
+//#define HOMESATFIX 6                // Minimum number of sats required when setting initial home location. 
+//#define GPSOSDARMDISTANCE 20        // distance from home in meters when GPSOSD arms. Starts flight timer etc.
+//#define GPSOSDHOMEDISTANCE 40       // distance from home in meters when GPSOSD is home. When speed is low it disarms and displays summary screen.
 //#define GPSDOP 300                // UBLOX only - minimum PDOP required for sat fix. A DOP of 2.00 is considered good 
 //#define DISPLAYDOP                // UBLOX only - display DOP when its bad - above GPSDOP. Uses and requires temperature position to be enabled
 //#define PWM_OSD_SWITCH            // Enables 3 way screen switch using a TX channel via a RX channel connected to the OSD PWM input pin (RSSI pin on basic MINIM hardware). 
